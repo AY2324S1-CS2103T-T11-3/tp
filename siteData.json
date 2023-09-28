@@ -7,7 +7,7 @@
       "headings": {
         "about-us": "About Us",
         "project-team": "Project team",
-        "john-doe": "John Doe",
+        "phua-zai-lian": "Phua Zai Lian",
         "jane-doe": "Jane Doe",
         "johnny-doe": "Johnny Doe",
         "jean-doe": "Jean Doe",
@@ -140,6 +140,14 @@
       "title": "John Doe's Project Portfolio Page",
       "headings": {
         "project-addressbook-level-3": "Project: AddressBook Level 3"
+      },
+      "headingKeywords": {}
+    },
+    {
+      "src": "team/pzl111.md",
+      "title": "Phua Zai Lian's Project Portfolio Page",
+      "headings": {
+        "project-tutormate": "Project: TutorMate"
       },
       "headingKeywords": {}
     },
