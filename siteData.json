@@ -9,6 +9,7 @@
         "project-team": "Project team",
         "phua-zai-lian": "Phua Zai Lian",
         "richie-hsieh": "Richie Hsieh",
+        "wang-yiwen": "Wang Yiwen",
         "johnny-doe": "Johnny Doe",
         "jean-doe": "Jean Doe",
         "james-doe": "James Doe"
@@ -154,6 +155,14 @@
     {
       "src": "team/richiehx.md",
       "title": "Richie's Project Portfolio Page",
+      "headings": {
+        "project-tutormate": "Project: TutorMate"
+      },
+      "headingKeywords": {}
+    },
+    {
+      "src": "team/yiwen.md",
+      "title": "Yiwen's Project Portfolio Page",
       "headings": {
         "project-tutormate": "Project: TutorMate"
       },
