@@ -1,10 +1,16 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.Remark;
+
+import java.util.List;
 
 public class RemarkCommand extends Command {
     public static final String COMMAND_WORD = "remark";
@@ -18,6 +24,8 @@ public class RemarkCommand extends Command {
             + "r/ Likes to swim.";
     public static final String MESSAGE_NOT_IMPLEMENTED_YET =
             "Remark command not implemented yet";
+    public static final String MESSAGE_ADD_REMARK_SUCCESS = "Added remark to Person: %1$s";
+    public static final String MESSAGE_DELETE_REMARK_SUCCESS = "Removed remark from Person: %1$s";
     public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Remark: %2$s";
 
     private final Index index;
@@ -34,9 +42,24 @@ public class RemarkCommand extends Command {
         this.remark = remark;
     }
     @Override
-    public  CommandResult execute(Model model) throws CommandException {
-        throw new CommandException("remark is: " + remark);
+    public CommandResult execute(Model model) throws CommandException {
+        List<Person> lastShownList = model.getFilteredPersonList();
+
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+
+        Person personToEdit = lastShownList.get(index.getZeroBased());
+        Person editedPerson = new Person(
+                personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
+                personToEdit.getAddress(),  personToEdit.getTags(), remark);
+
+        model.setPerson(personToEdit, editedPerson);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
+        return new CommandResult(String.format(MESSAGE_ADD_REMARK_SUCCESS, Messages.format(editedPerson)));
     }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
