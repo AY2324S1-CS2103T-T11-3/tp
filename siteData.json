@@ -8,7 +8,7 @@
         "about-us": "About Us",
         "project-team": "Project team",
         "phua-zai-lian": "Phua Zai Lian",
-        "jane-doe": "Jane Doe",
+        "richie-hsieh": "Richie Hsieh",
         "johnny-doe": "Johnny Doe",
         "jean-doe": "Jean Doe",
         "james-doe": "James Doe"
@@ -146,6 +146,14 @@
     {
       "src": "team/pzl111.md",
       "title": "Phua Zai Lian's Project Portfolio Page",
+      "headings": {
+        "project-tutormate": "Project: TutorMate"
+      },
+      "headingKeywords": {}
+    },
+    {
+      "src": "team/richiehx.md",
+      "title": "Richie's Project Portfolio Page",
       "headings": {
         "project-tutormate": "Project: TutorMate"
       },
