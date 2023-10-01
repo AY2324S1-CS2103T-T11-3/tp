@@ -36,6 +36,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 [[github](http://github.com/yiwen101)]
 [[portfolio](team/yiwen.md)]
+
 ### Marcus Soh
 
 <img src="images/marcus.jpg" width="200px">
@@ -45,22 +46,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Loh Shi Jie, Elaine
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/elaineshijie.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/elaineshijie)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Development
+
