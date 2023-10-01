@@ -11,31 +11,36 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Phua Zai Lian
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/pzl111.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/pzl111)]
+[[portfolio](team/pzl111.md)]
 
-* Role: Project Advisor
+* Role: Lead Developer
 
-### Jane Doe
+### Richie Hsieh
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/richiehx.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/richiehx)]
+[[portfolio](team/richiehx.md)]
 
 * Role: Team Lead
-* Responsibilities: UI
+* Responsibilities: Development
 
-### Johnny Doe
+### Wang Yiwen
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/yiwen.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/yiwen101)]
+[[portfolio](team/yiwen.md)]
+### Marcus Soh
+
+<img src="images/marcus.jpg" width="200px">
+
+[[github](http://github.com/HollaG)] [[portfolio](team/marcus.md)]
 
 * Role: Developer
 * Responsibilities: Data

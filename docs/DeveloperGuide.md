@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# TutorMate Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -269,27 +269,44 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* Private Tuition Teachers
+* has a need to manage a significant number of students
+* Teaches multiple subjects
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: Helps private tuition teachers manage their students more easily. Faster access and storage of students’ contacts and data than a typical mouse/GUI driven app, provides better time management and productivity. The app will help to manage students for a single tuition teacher only. The app will only provide simple student analytics (without detailed student progress analysis).
+
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| Priority | As a …​                                     | I want to …​                                                         | So that I can…​                                                            |
+|----------|---------------------------------------------|----------------------------------------------------------------------|----------------------------------------------------------------------------|
+| `* * *`  | new user                                    | see usage instructions                                               | refer to instructions when I forget how to use the App                     |
+| `* * *`  | new user                                    | purge all existing data                                              | get rid of the experimental data when exploring the app                    |
+| `* * *`  | lazy tutor                                  | add students by name                                                 | include new students into our app                                          |
+| `* * *`  | user                                        | delete a person                                                      | remove entries that I no longer need                                       |
+| `* * *`  | user                                        | find a student by name or subject                                    | locate details of persons without having to go through the entire list     |
+| `* * *`  | tutor                                       | update my students details as they progress through learning         | keep track of their information e.g. test scores                           |
+| `* * *`  | tutor                                       | quickly edit student details                                         | save time re-adding students if I have added the wrong details by accident |
+| `* * *`  | flexible tutor                              | edit my student’s lesson timings                                     | accommodate any changes in timing requested by them                        |
+| `* * *`  | private tutor                               | install the app on my device with one click                          | use the app with ease without much trouble building the environment        |
+| `* * *`  | private tutor                               | see a specific student’s data from the contact list                  | get a more concise and detailed view of the student                        |
+| `* *`    | user                                        | hide private contact details                                         | minimize chance of someone else seeing them by accident                    |
+| `*`      | user with many students in the address book | sort persons by name                                                 | locate a person easily                                                     |
+| `*`      | forgetful tutor                             | receive notifications on upcoming lessons                            | prevent forgetting to teach my students                                    |
+| `*`      | forgetful tutor                             | include certain tasks to do for each student                         | remember to do them in preparation for the student's next class            |
+| `*`      | tutor                                       | see my teaching schedule for the next day                            | complete lesson preparation that is catered to the student                 |
+| `*`      | efficient tutor                             | see my available time slots and allocate tuition timings accordingly | maximize my time usage                                                     |
+| `*`      | private tutor                               | add questions that the student has asked me in class to the app      | review and answer it in the next lesson                                    |
+| `*`      | regular app user                            | hide information that is not relevant to me currently                | have a cleaner User Interface                                              |
+| `*`      | advanced user                               | create new commands that group many primitive commands together      | save time and energy with these customized high level commands             |
+
 
 *{More to be added}*
 
