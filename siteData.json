@@ -10,7 +10,7 @@
         "phua-zai-lian": "Phua Zai Lian",
         "richie-hsieh": "Richie Hsieh",
         "wang-yiwen": "Wang Yiwen",
-        "johnny-doe": "Johnny Doe",
+        "marcus-soh": "Marcus Soh",
         "jean-doe": "Jean Doe",
         "james-doe": "James Doe"
       },
@@ -141,6 +141,14 @@
       "title": "John Doe's Project Portfolio Page",
       "headings": {
         "project-addressbook-level-3": "Project: AddressBook Level 3"
+      },
+      "headingKeywords": {}
+    },
+    {
+      "src": "team/marcus.md",
+      "title": "Marcus' Project Portfolio Page",
+      "headings": {
+        "project-tutormate": "Project: TutorMate"
       },
       "headingKeywords": {}
     },
