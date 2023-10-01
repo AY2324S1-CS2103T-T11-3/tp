@@ -94,6 +94,11 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Adds a remark to a person
+     * @param remark
+     * @return Person with remark
+     */
     public PersonBuilder withRemark(String remark) {
         this.remark = new Remark(remark);
         return this;
