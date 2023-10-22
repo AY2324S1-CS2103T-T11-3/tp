@@ -121,6 +121,7 @@
         "adding-a-student-add": "Adding a student: add",
         "listing-all-students-list": "Listing all students : list",
         "editing-a-student-edit": "Editing a student : edit",
+        "locating-students-by-name-find": "Locating students by name: find",
         "showing-a-student-s-details-show": "Showing a student's details : show",
         "deleting-a-student-delete": "Deleting a student : delete",
         "exiting-the-program-exit": "Exiting the program : exit",
@@ -136,7 +137,7 @@
       "src": "index.md",
       "title": "",
       "headings": {
-        "addressbook-level-3": "AddressBook Level-3"
+        "tutormate": "TutorMate"
       },
       "headingKeywords": {}
     },
