@@ -29,6 +29,10 @@ Class Subject
 Class I #FFFFFF
 }
 
+package UI <<Rectangle>> {
+Class HiddenModel #FFFFFF
+}
+
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
@@ -41,6 +45,7 @@ Model .left.> ReadOnlyAddressBook
 Model .left.> ReadOnlySchedule
 ModelManager -left-> "1" AddressBook
 ModelManager -right-> "1" UserPrefs
+ModelManager -> UI
 ModelManager -left-> "1" Schedule
 UserPrefs .up.|> ReadOnlyUserPrefs
 
