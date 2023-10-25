@@ -287,7 +287,7 @@ public class TypeParsingUtil {
      */
     public static Subject parseSubject(String flagName, String input, boolean isOptional) throws ParseException {
         if (isOptional && parseStrs(flagName, input, true) == null) {
-            return null;
+            return Subject.getNone();
         }
 
         return parseSubject(parseFlag(flagName, input));

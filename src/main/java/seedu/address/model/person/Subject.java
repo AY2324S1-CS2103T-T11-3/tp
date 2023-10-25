@@ -75,6 +75,13 @@ public class Subject {
     }
 
     /**
+     * Returns an empty subject.
+     */
+    public static Subject getNone() {
+        return new Subject("NONE");
+    }
+
+    /**
      * Format subject as text for viewing.
      */
     public String toString() {

@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.lessons.Lesson;
+import seedu.address.model.lessons.TaskList;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -80,7 +81,7 @@ public class AddCommandParserTest {
                     + "-lesson -subject English -start 12:00 -end 13:00 -day 20/12/23").getLesson();
             Lesson expectedLesson = new Lesson(LocalDateTime.of(2020, 12, 23, 12, 0),
                     LocalDateTime.of(2020, 12, 23, 13, 0),
-                    new Subject("English"),
+                    new Subject("English"), new TaskList(),
                     new Name("Yiwen"));
             assertEquals(expectedLesson, actualLesson);
         } catch (ParseException e) {

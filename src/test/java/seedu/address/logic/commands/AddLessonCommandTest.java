@@ -13,6 +13,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.lessons.Lesson;
+import seedu.address.model.lessons.TaskList;
 import seedu.address.model.person.Name;
 
 
@@ -26,7 +27,7 @@ class AddLessonCommandTest {
         } catch (Exception e) {
             assertTrue(e instanceof NullPointerException);
         }
-        Lesson lesson = new Lesson(LocalDateTime.now(), LocalDateTime.now(), new Name("test"));
+        Lesson lesson = new Lesson(LocalDateTime.now(), LocalDateTime.now(), new TaskList(), new Name("test"));
         AddLessonCommand addLessonCommand = new AddLessonCommand(lesson);
         try {
             addLessonCommand.execute(null);

@@ -49,7 +49,7 @@ public class LessonListPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Lesson} using a {@code LessonCard}.
      */
     class ScheduleListViewCell extends ListCell<Lesson> {
         @Override

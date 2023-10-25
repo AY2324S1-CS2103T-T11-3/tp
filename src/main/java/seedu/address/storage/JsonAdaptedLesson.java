@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.lessons.Lesson;
+import seedu.address.model.lessons.TaskList;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Subject;
 
@@ -20,17 +21,20 @@ public class JsonAdaptedLesson {
     private final String end;
     private final String subject;
     private final String students; // comma-separated
+    private final String taskList;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
     public JsonAdaptedLesson(@JsonProperty("start") String start, @JsonProperty("end") String end,
-                             @JsonProperty("subject") String subject, @JsonProperty("students") String students) {
+                             @JsonProperty("subject") String subject, @JsonProperty("students") String students,
+                             @JsonProperty("students") String taskList) {
         this.start = start;
         this.end = end;
         this.subject = subject;
         this.students = students;
+        this.taskList = taskList;
 
     }
 
@@ -42,6 +46,7 @@ public class JsonAdaptedLesson {
         end = source.serializeEnd();
         subject = source.serializeSubject();
         students = source.serializeStudents();
+        taskList = source.serializeTaskList(); //TODO
     }
     /**
      * Converts this Jackson-friendly adapted lesson object into the model's {@code Lesson} object.
@@ -53,7 +58,8 @@ public class JsonAdaptedLesson {
         LocalDateTime end = Lesson.deserializeDate(this.end);
         Subject subject = Lesson.deserializeSubject(this.subject);
         ArrayList<String> students = Lesson.deserializeStudents(this.students);
+        TaskList taskList = Lesson.deserializeTaskList(this.taskList); //TODO
 
-        return new Lesson(start, end, subject, students.stream().map(Name::new).toArray(Name[]::new));
+        return new Lesson(start, end, subject, taskList, students.stream().map(Name::new).toArray(Name[]::new));
     }
 }

@@ -34,8 +34,7 @@ public class LessonCard extends UiPart<Region> {
     private Label id;
     @FXML
     private Label duration;
-    // @FXML
-    // private FlowPane tags;
+
 
     /**
      * Creates a {@code LessonCard} with the given {@code Lesson} and index to display.

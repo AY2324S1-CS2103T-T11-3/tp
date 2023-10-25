@@ -28,6 +28,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlySchedule;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.lessons.Lesson;
+import seedu.address.model.lessons.TaskList;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.state.State;
@@ -40,8 +41,8 @@ public class AddCommandTest {
         ModelManager modelManager = new ModelManager();
         Person p1 = new Person(new Name("Yiwen"));
         Person p2 = new Person(new Name("Wang"));
-        Lesson lesson1 = new Lesson(LocalDateTime.now(), LocalDateTime.now().plusHours(1));
-        Lesson lesson2 = new Lesson(LocalDateTime.now(), LocalDateTime.now().plusHours(1));
+        Lesson lesson1 = new Lesson(LocalDateTime.now(), LocalDateTime.now().plusHours(1), new TaskList());
+        Lesson lesson2 = new Lesson(LocalDateTime.now(), LocalDateTime.now().plusHours(1), new TaskList());
         AddCommand addCommand1 = new AddCommand(p1, lesson1);
         AddCommand addCommand2 = new AddCommand(p1, lesson2);
         AddCommand addCommand3 = new AddCommand(p2, lesson1);

@@ -3,11 +3,14 @@ package seedu.address.ui;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.model.lessons.Lesson;
+import seedu.address.model.lessons.Task;
 
 
 /**
@@ -34,6 +37,9 @@ public class LessonDetailListPanel extends UiPart<Region> {
     @FXML
     private TextField subject;
 
+    @FXML
+    private ListView<Task> taskListView;
+
 
     /**
      * Creates a {@code LessonDetailListPanel} with the given {@code ObservableList}.
@@ -55,6 +61,22 @@ public class LessonDetailListPanel extends UiPart<Region> {
         endTime.setText(lesson.getEndTimeStr());
         students.setText(lesson.getStudentsStr());
         subject.setText(lesson.getSubjectStr());
+        taskListView.setItems(lesson.getTaskList());
+        taskListView.setCellFactory(listView -> new LessonDetailListPanel.TaskListViewCell());
+    }
+
+    class TaskListViewCell extends ListCell<Task> {
+        @Override
+        protected void updateItem(Task task, boolean empty) {
+            super.updateItem(task, empty);
+
+            if (empty || task == null) {
+                setGraphic(null);
+                setText(null);
+            } else {
+                setGraphic(new TaskCard(task, getIndex() + 1).getRoot());
+            }
+        }
     }
 
 }

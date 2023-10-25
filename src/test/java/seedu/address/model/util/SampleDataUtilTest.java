@@ -13,4 +13,14 @@ class SampleDataUtilTest {
             assert false;
         }
     }
+
+    @Test
+    public void getSampleLessons() {
+        try {
+            assertTrue(SampleDataUtil.getSampleLessons().length > 0);
+        } catch (Exception e) {
+            assert false;
+        }
+    }
+
 }

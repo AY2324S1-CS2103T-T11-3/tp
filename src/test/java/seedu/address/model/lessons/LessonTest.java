@@ -23,7 +23,7 @@ class LessonTest {
         names.add(new Name("Yiwen3"));
         Lesson lesson = new Lesson(LocalDateTime.of(2020, 1, 1, 1, 1),
                 LocalDateTime.of(2020, 1, 1, 2, 1),
-                new Subject("English"),
+                new Subject("English"), new TaskList(),
                 names);
         Person p = new Person(new Name("Yiwen"));
         assertTrue(lesson.hasStudent(p));

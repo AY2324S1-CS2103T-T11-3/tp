@@ -7,6 +7,7 @@ import java.time.LocalTime;
 import seedu.address.logic.commands.AddLessonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.lessons.Lesson;
+import seedu.address.model.lessons.TaskList;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Subject;
 
@@ -42,9 +43,10 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
         }
         LocalDateTime start = LocalDateTime.of(date, startTime);
         LocalDateTime end = LocalDateTime.of(date, endTime);
+        TaskList taskList = new TaskList();
         if (subject == null) {
-            return new Lesson(start, end, studentName);
+            return new Lesson(start, end, taskList, studentName);
         }
-        return new Lesson(start, end, subject, studentName);
+        return new Lesson(start, end, subject, taskList, studentName);
     }
 }

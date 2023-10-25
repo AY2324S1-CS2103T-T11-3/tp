@@ -2,6 +2,7 @@ package seedu.address.model.util;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -10,6 +11,8 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlySchedule;
 import seedu.address.model.ScheduleList;
 import seedu.address.model.lessons.Lesson;
+import seedu.address.model.lessons.Task;
+import seedu.address.model.lessons.TaskList;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -86,11 +89,14 @@ public class SampleDataUtil {
         LocalDateTime endLesson4 = LocalDateTime.of(2022, 9, 20, 15, 30);
         Subject math = new Subject("MATHEMATICS");
         Subject bio = new Subject("BIOLOGY");
+        TaskList taskList = new TaskList();
+        List<Task> tasks = Arrays.asList(new Task("first"), new Task("second"), new Task("third"));
+        taskList.setTasks(tasks);
         return new Lesson[] {
-            new Lesson(startLesson1, endLesson1, math, new Name("Alex Yeoh")),
-            new Lesson(startLesson2, endLesson2, math, new Name("David Li")),
-            new Lesson(startLesson3, endLesson3, bio, new Name("Bernice Yu")),
-            new Lesson(startLesson4, endLesson4, bio, new Name("Bernice Yu")),
+            new Lesson(startLesson1, endLesson1, math, taskList, new Name("Alex Yeoh")),
+            new Lesson(startLesson2, endLesson2, math, taskList, new Name("David Li")),
+            new Lesson(startLesson3, endLesson3, bio, taskList, new Name("Bernice Yu")),
+            new Lesson(startLesson4, endLesson4, bio, taskList, new Name("Bernice Yu")),
         };
     }
     public static ReadOnlySchedule getSampleSchedule() {

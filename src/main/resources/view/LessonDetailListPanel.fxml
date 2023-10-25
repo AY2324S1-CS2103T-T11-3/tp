@@ -9,6 +9,8 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.control.ListView?>
+
 <AnchorPane prefHeight="340.0" prefWidth="340.0" style="-fx-background-color: #322D46; -fx-background-radius: 10;" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label layoutX="10.0" layoutY="10.0" style="-fx-text-fill: white;" styleClass="panel-label" text="Lesson Details" />
@@ -48,6 +50,14 @@
                   <TextField fx:id="students" editable="false" style="-fx-background-color: transparent; -fx-text-fill: white;" text="\$students" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
+            <ListView fx:id="taskListView" VBox.vgrow="ALWAYS">
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </ListView>
          </children>
          <padding>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

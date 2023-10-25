@@ -27,7 +27,6 @@ import seedu.address.model.person.exceptions.DuplicatePersonException;
  */
 public class Schedule implements Iterable<Lesson> {
 
-    // private ArrayList<Lesson> lessons = new ArrayList<>();
     private final ObservableList<Lesson> internalSchedule = FXCollections.observableArrayList();
     private final LessonComparator lessonComparator = new LessonComparator();
     private final ObservableList<Lesson> internalUnmodifiableSchedule =
@@ -140,8 +139,8 @@ public class Schedule implements Iterable<Lesson> {
     }
 
     /**
-     * Replaces the contents of this list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of this list with {@code lessons}.
+     * {@code lessons} must not contain duplicate lessons.
      */
     public void setLessons(List<Lesson> lessons) {
         requireAllNonNull(lessons);
@@ -191,7 +190,7 @@ public class Schedule implements Iterable<Lesson> {
     }
 
     /**
-     * Returns true if {@code persons} contains only unique persons.
+     * Returns true if {@code lessons} contains only unique lessons.
      */
     private boolean lessonsAreUnique(List<Lesson> lessons) {
         for (int i = 0; i < lessons.size() - 1; i++) {

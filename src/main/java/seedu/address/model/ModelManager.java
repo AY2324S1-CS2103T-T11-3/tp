@@ -29,6 +29,8 @@ public class ModelManager implements Model {
     private final FilteredList<Lesson> filteredLessons;
     private Ui ui = null;
     private State state = State.SCHEDULE; // Default state of app. Can be either SCHEDULE or STUDENTS
+    private Person currentShowingPerson = null;
+    private Lesson currentShowingLesson = null;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -229,6 +231,7 @@ public class ModelManager implements Model {
     public void showPerson(Person person) {
         requireNonNull(person);
         if (ui != null) {
+            currentShowingPerson = person;
             ui.showPersonDetails(person);
         }
     }
@@ -237,6 +240,7 @@ public class ModelManager implements Model {
     public void showLesson(Lesson lesson) {
         requireNonNull(lesson);
         if (ui != null) {
+            currentShowingLesson = lesson;
             ui.showLessonDetails(lesson);
         }
     }
