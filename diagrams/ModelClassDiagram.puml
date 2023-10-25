@@ -13,6 +13,7 @@ Class AddressBook
 Class Schedule
 Class ModelManager
 Class UserPrefs
+Class State
 
 Class ScheduleList
 Class Lesson
@@ -25,6 +26,7 @@ Class Name
 Class Phone
 Class Tag
 Class Subject
+Class Remark
 
 Class I #FFFFFF
 }
@@ -46,6 +48,7 @@ Model .left.> ReadOnlySchedule
 ModelManager -left-> "1" AddressBook
 ModelManager -right-> "1" UserPrefs
 ModelManager -> UI
+ModelManager --> "1" State
 ModelManager -left-> "1" Schedule
 UserPrefs .up.|> ReadOnlyUserPrefs
 
@@ -60,6 +63,7 @@ Person *--> Email
 Person *--> Address
 Person *--> "*" Tag
 Person *--> "*" Subject
+Person *--> "1" Remark
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I

@@ -12,6 +12,9 @@ Class MainWindow
 Class HelpWindow
 Class ResultDisplay
 Class PersonListPanel
+Class LessonListPanel
+Class StudentDetailListPanel
+Class LessonDetailListPanel
 Class PersonCard
 Class StatusBarFooter
 Class CommandBox
@@ -33,6 +36,9 @@ UiManager -down-> "1" MainWindow
 MainWindow *-down->  "1" CommandBox
 MainWindow *-down-> "1" ResultDisplay
 MainWindow *-down-> "1" PersonListPanel
+MainWindow *-down-> "1" LessonListPanel
+MainWindow *-down-> "1" StudentDetailListPanel
+MainWindow *-down-> "1" LessonDetailListPanel
 MainWindow *-down-> "1" StatusBarFooter
 MainWindow --> "0..1" HelpWindow
 
