@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Person's address in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
  */
-public class Address implements Parseable<Address> {
+public class Address implements Parseable {
     public static final Address DEFAULT_ADDRESS = new Address();
     public static final String DEFAULT_ADDRESS_MESSAGE = "To be added.";
 

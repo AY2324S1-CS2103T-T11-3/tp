@@ -175,4 +175,17 @@ public interface Model {
      * @param state State to check against app
      */
     boolean sameState(State state);
+
+    /**
+     * Gets the current shown entry.
+     * @return person or lesson or task currently shown
+     */
+    default ListEntry getCurrentShownEntry() {
+        // todo: implement this properly
+        return Person.getDefaultPerson();
+    }
+    default ObservableList<? extends ListEntry> getCurrentShownList() {
+        // todo: implement this properly
+        return getFilteredPersonList();
+    }
 }

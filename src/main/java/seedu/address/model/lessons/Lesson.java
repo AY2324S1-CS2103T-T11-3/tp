@@ -10,6 +10,7 @@ import java.util.Objects;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.model.ListEntry;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Subject;
@@ -18,7 +19,8 @@ import seedu.address.model.person.Subject;
  * Represents a student's lesson in the schedule.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Lesson {
+public class Lesson implements ListEntry {
+    private Name name;
     // Lesson fields
     private LocalDateTime start;
     private LocalDateTime end;
@@ -62,6 +64,20 @@ public class Lesson {
         this.end = end;
         this.subject = subject;
         this.students = studentNames;
+    }
+
+    public Name getName() {
+        return name;
+    }
+
+    public void setName(Name name) {
+        this.name = name;
+    }
+
+    public void setNameIfNotNull(Name name) {
+        if (name != null) {
+            setName(name);
+        }
     }
 
     /**
@@ -333,5 +349,9 @@ public class Lesson {
      */
     private boolean isSameDay() {
         return start.toLocalDate().isEqual(end.toLocalDate());
+    }
+
+    public Lesson clone() {
+        return new Lesson(start, end, subject, students);
     }
 }

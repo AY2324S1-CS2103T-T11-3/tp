@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Person's email in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidEmail(String)}
  */
-public class Email implements Parseable<Email> {
+public class Email implements Parseable {
     public static final Email DEFAULT_EMAIL = new Email();
     public static final String DEFAULT_EMAIL_MESSAGE = "To be added.";
     private static final String SPECIAL_CHARACTERS = "+_.-";

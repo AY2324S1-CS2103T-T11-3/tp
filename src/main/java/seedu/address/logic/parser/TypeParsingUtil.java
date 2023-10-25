@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -11,13 +12,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.logic.parser.exceptions.*;
+import seedu.address.model.ListEntry;
 import seedu.address.model.Parseable;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
 import seedu.address.model.person.Subject;
 import seedu.address.model.tag.Tag;
+
+import static seedu.address.logic.ReflectionUtil.*;
+import static seedu.address.logic.ReflectionUtil.call;
 
 // I am considering probably make sense to write specific parser inside each class.
 /**
@@ -26,6 +28,7 @@ import seedu.address.model.tag.Tag;
 public class TypeParsingUtil {
     /**
      * Parses the time from the input string, which can be in the following formats: hh:mm
+     *
      * @param input the input string where the time is to be parsed from
      * @return the time parsed
      * @throws ParseException if the input is not a valid time
@@ -45,12 +48,14 @@ public class TypeParsingUtil {
             throw new InvalidInputException(input + " is not a valid time");
         }
     }
+
     /**
      * overloading parseTime to take in flagName and parse the flag from the input string
      */
     public static LocalTime parseTime(String flagName, String input) throws ParseException {
         return parseTime(parseFlag(flagName, input));
     }
+
     /**
      * overloading to not throw exception if the flag is not found when isOptional is true
      */
@@ -64,6 +69,7 @@ public class TypeParsingUtil {
         }
         return parseTime(parseFlag(flagName, input));
     }
+
     private static Integer findMaxDay(int year, int month) {
         if (month == 2) {
             if (year % 4 == 0) {
@@ -77,12 +83,14 @@ public class TypeParsingUtil {
             return 31;
         }
     }
+
     /**
      * Parses the date from the input string, which can be in the following formats:
      * 1. dd, then the date will be the current month and year
      * 2. mm/dd ,then the date will be the current year
      * 3. yyyy/mm/dd ,then the date will be the given year
      * 4. yy/mm/dd ,then the date will be the given year + 2000
+     *
      * @param input the input string where the date is to be parsed from
      * @return the date parsed
      * @throws ParseException if the input is not a valid date
@@ -142,9 +150,10 @@ public class TypeParsingUtil {
 
     /**
      * Parses the number from the input string
+     *
      * @param input the input string where the flag is to be parsed from
-     * @param min the minimum value of the number
-     * @param max the maximum value of the number
+     * @param min   the minimum value of the number
+     * @param max   the maximum value of the number
      * @return the number parsed
      * @throws ParseException if the input is not a valid number
      */
@@ -194,18 +203,21 @@ public class TypeParsingUtil {
         }
         return parseNum(parseFlag(flagName, input));
     }
+
     /**
      * Parses the string from the input string
      */
     public static String parseStr(String input) throws ParseException {
         return input;
     }
+
     /**
      * overloading parseStr to take in flagName and parse the flag from the input string
      */
     public static String parseStr(String flagName, String input) throws ParseException {
         return parseStr(parseFlag(flagName, input));
     }
+
     /**
      * overloading to not throw exception if the flag is not found when isOptional is true
      */
@@ -219,8 +231,10 @@ public class TypeParsingUtil {
         }
         return parseStr(parseFlag(flagName, input));
     }
+
     /**
      * Parses the strings from the input string
+     *
      * @param input the input string of substr seperated by ,
      */
     public static String[] parseStrs(String flagName, String input) throws ParseException {
@@ -231,6 +245,7 @@ public class TypeParsingUtil {
         }
         return strList;
     }
+
     /**
      * overloading to not throw exception if the flag is not found when isOptional is true
      */
@@ -247,6 +262,7 @@ public class TypeParsingUtil {
 
     /**
      * Parses the subject from the input string
+     *
      * @param input the input string where the flag is to be parsed from
      * @return the subject parsed
      * @throws ParseException if the input is not a valid subject
@@ -258,12 +274,14 @@ public class TypeParsingUtil {
             throw new InvalidInputException(input + " is not a valid subject");
         }
     }
+
     /**
      * overloading parseSubject to take in flagName and parse the flag from the input string
      */
     public static Subject parseSubject(String flagName, String input) throws ParseException {
         return parseSubject(parseFlag(flagName, input));
     }
+
     /**
      * overloading to not throw exception if the flag is not found when isOptional is true
      */
@@ -274,6 +292,7 @@ public class TypeParsingUtil {
 
         return parseSubject(parseFlag(flagName, input));
     }
+
     /**
      * Parses the subjects from the input string
      */
@@ -286,6 +305,7 @@ public class TypeParsingUtil {
         assert !subjectSet.isEmpty();
         return subjectSet;
     }
+
     /**
      * overloading to not throw exception if the flag is not found when isOptional is true
      */
@@ -299,8 +319,10 @@ public class TypeParsingUtil {
         }
         return parseSubjects(flagName, input);
     }
+
     /**
      * Parses the day of week from the input string
+     *
      * @param input the input string where the flag is to be parsed from
      * @return the day of week parsed
      * @throws InvalidInputException if the input is not a valid day of week
@@ -366,9 +388,11 @@ public class TypeParsingUtil {
         }
         return parseTags(flag, input);
     }
+
     /**
      * Parses the flag from the input string
-     * @param flag the flag to parse
+     *
+     * @param flag  the flag to parse
      * @param input the input string where the flag is to be parsed from
      * @return the string after the flag
      * @throws FlagNotFoundException if the flag is not found
@@ -387,6 +411,7 @@ public class TypeParsingUtil {
             throw new FlagNotFoundException("Flag " + flag + " not found");
         }
     }
+
     public static String getValueImmediatelyAfterCommandName(String commandWord,
                                                              String errorFieldName,
                                                              String input) throws ParseException {
@@ -399,7 +424,21 @@ public class TypeParsingUtil {
         }
     }
 
-    public static <T extends Parseable<T>> T parseTo(Class<T> parsedTo, String inputStr) throws ParseException {
+    public static String getValueImmediatelyAfterCommandName(String commandWord,
+                                                             String errorFieldName,
+                                                             String input,
+                                                             boolean isOptional) throws ParseException {
+        if (isOptional) {
+            try {
+                getValueImmediatelyAfterCommandName(commandWord, errorFieldName, input);
+            } catch (FlagNotFoundException e) {
+                return null;
+            }
+        }
+        return getValueImmediatelyAfterCommandName(commandWord, errorFieldName, input);
+    }
+
+    public static <T extends Parseable> T parseTo(Class<T> parsedTo, String inputStr) throws ParseException {
         Method isValid;
         Method of;
         try {
@@ -428,10 +467,12 @@ public class TypeParsingUtil {
             throw new InternalErrorExcpetion("Internal error: " + e.getMessage());
         }
     }
-    public static <T extends Parseable<T>> T parseTo(Class<T> parsedTo, String flagName, String inputStr) throws ParseException {
+
+    public static <T extends Parseable> T parseTo(Class<T> parsedTo, String flagName, String inputStr) throws ParseException {
         return parseTo(parsedTo, parseFlag(flagName, inputStr));
     }
-    public static <T extends Parseable<T>> T parseTo(Class<T> parsedTo, String flagName, String inputStr, boolean isOptional) throws ParseException {
+
+    public static <T extends Parseable> T parseTo(Class<T> parsedTo, String flagName, String inputStr, boolean isOptional) throws ParseException {
         if (isOptional) {
             try {
                 parseFlag(flagName, inputStr);
@@ -441,4 +482,26 @@ public class TypeParsingUtil {
         }
         return parseTo(parsedTo, parseFlag(flagName, inputStr));
     }
+
+    @SuppressWarnings("unchecked")
+    public static ListEntry parseToListEntry(Class<? extends ListEntry> listEntryClass, String inputStr) throws ParseException {
+        try {
+            String fieldName;
+            ListEntry defaultEntry = (ListEntry) call(listEntryClass, "getDefault" + listEntryClass.getSimpleName());
+            for (Field field : getPrivateFields(listEntryClass)) {
+                fieldName = capitaliseFieldName(field);
+                if (fieldName.equals("Name")) {
+                    call(defaultEntry, "setNameIfNotNull", parseTo(Name.class, inputStr));
+                } else {
+                    String setter = "set" + fieldName + "IfNotNull";
+                    call(defaultEntry, setter, parseTo((Class<? extends Parseable>) field.getType(), inputStr));
+                }
+            }
+            return defaultEntry;
+        } catch (Exception e) {
+            throw new ParseException("Error parsing GenericAddCommand for " + listEntryClass.getSimpleName() + "." + e.getMessage());
+        }
+    }
+
+
 }

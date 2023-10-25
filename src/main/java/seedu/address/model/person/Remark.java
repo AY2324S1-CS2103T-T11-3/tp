@@ -8,7 +8,7 @@ import static java.util.Objects.requireNonNull;
  * Represents a Person's remark in the address book.
  * Guarantees: immutable; is always valid
  */
-public class Remark implements Parseable<Remark> {
+public class Remark implements Parseable {
     public static final Remark DEFAULT_REMARK = new Remark("To be added");
 
     public final String value;

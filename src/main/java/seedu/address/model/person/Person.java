@@ -8,13 +8,22 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.ListEntry;
 import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Person in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Person {
+public class Person implements ListEntry {
+    private static final Person DEFAULT_PERSON = new Person(
+            new Name("Default Person"),
+            Phone.DEFAULT_PHONE,
+            Email.DEFAULT_EMAIL,
+            Address.DEFAULT_ADDRESS,
+            new HashSet<>(),
+            new HashSet<>(),
+            Remark.DEFAULT_REMARK);
 
     // Identity fields
     private Name name;
@@ -48,6 +57,9 @@ public class Person {
         this.subjects.addAll(subjects);
         this.tags.addAll(tags);
         this.remark = remark;
+    }
+    public static Person getDefaultPerson() {
+        return DEFAULT_PERSON.clone();
     }
 
     public Name getName() {

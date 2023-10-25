@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Person's phone number in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidPhone(String)}
  */
-public class Phone implements Parseable<Phone> {
+public class Phone implements Parseable {
     public static final Phone DEFAULT_PHONE = new Phone();
     public static final String DEFAULT_PHONE_MESSAGE = "To be added.";
 
