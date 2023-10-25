@@ -26,18 +26,13 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         int index = TypeParsingUtil.parseNum(TypeParsingUtil
                 .getValueImmediatelyAfterCommandName("edit", "index", args));
-        Name name = TypeParsingUtil.parseName("name", args, true);
-        Phone phone = TypeParsingUtil.parsePhone("phone", args, true);
-        Email email = TypeParsingUtil.parseEmail("email", args, true);
-        Address address = TypeParsingUtil.parseAddress("address", args, true);
+        Name name = TypeParsingUtil.parseTo(Name.class,"name", args, true);
+        Phone phone = TypeParsingUtil.parseTo(Phone.class,"phone", args, true);
+        Email email = TypeParsingUtil.parseTo(Email.class,"email", args, true);
+        Address address = TypeParsingUtil.parseTo(Address.class,"address", args, true);
         Set<Subject> subjects = TypeParsingUtil.parseSubjects("subject", args, true);
         Set<Tag> tags = TypeParsingUtil.parseTags("tag", args, true);
-        Remark remark;
-        try {
-            remark = new Remark(TypeParsingUtil.parseFlag("remark", args));
-        } catch (ParseException e) {
-            remark = null;
-        }
+        Remark remark = TypeParsingUtil.parseTo(Remark.class,"remark", args, true);
         return new EditCommand(index, name, phone, email, address, subjects, tags, remark);
 
     }

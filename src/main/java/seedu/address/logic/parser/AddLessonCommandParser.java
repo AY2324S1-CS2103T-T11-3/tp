@@ -35,7 +35,7 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
             throw new ParseException("Start time must be before end time");
         }
         Subject subject = TypeParsingUtil.parseSubject("subject", args, true);
-        Name studentName = TypeParsingUtil.parseName("name", args);
+        Name studentName = TypeParsingUtil.parseTo(Name.class,"name", args);
         LocalDate date = TypeParsingUtil.parseDate("day", args, true);
         if (date == null) {
             date = LocalDate.now();

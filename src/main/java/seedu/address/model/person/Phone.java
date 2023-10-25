@@ -1,5 +1,7 @@
 package seedu.address.model.person;
 
+import seedu.address.model.Parseable;
+
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -7,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Person's phone number in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidPhone(String)}
  */
-public class Phone {
+public class Phone implements Parseable<Phone> {
     public static final Phone DEFAULT_PHONE = new Phone();
     public static final String DEFAULT_PHONE_MESSAGE = "To be added.";
 
@@ -38,7 +40,12 @@ public class Phone {
     public static boolean isValidPhone(String test) {
         return test.matches(VALIDATION_REGEX);
     }
-
+    public static Boolean isValid(String input) {
+        return isValidPhone(input);
+    }
+    public static Phone of(String input) {
+        return new Phone(input);
+    }
     @Override
     public String toString() {
         return value;

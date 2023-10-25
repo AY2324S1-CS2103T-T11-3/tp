@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import java.lang.reflect.Method;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -9,10 +10,8 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.logic.parser.exceptions.FlagNotFoundException;
-import seedu.address.logic.parser.exceptions.InvalidInputException;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.logic.parser.exceptions.RepeatedFlagException;
+import seedu.address.logic.parser.exceptions.*;
+import seedu.address.model.Parseable;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -334,121 +333,6 @@ public class TypeParsingUtil {
         }
         return parseDayOfWeek(parseFlag(flagName, input));
     }
-    /**
-     * Parses the email from the input string
-     */
-    public static Email parseEmail(String input) throws ParseException {
-        if (Email.isValidEmail(input)) {
-            return new Email(input);
-        } else {
-            throw new InvalidInputException(input + " is not a valid email");
-        }
-    }
-
-    public static Email parseEmail(String flag, String input) throws ParseException {
-        return parseEmail(parseFlag(flag, input));
-    }
-    /**
-     * overloading to not throw exception if the flag is not found when isOptional is true
-     */
-    public static Email parseEmail(String flag, String input, boolean isOptional) throws ParseException {
-        if (isOptional) {
-            try {
-                parseFlag(flag, input);
-            } catch (FlagNotFoundException e) {
-                return null;
-            }
-        }
-        return parseEmail(parseFlag(flag, input));
-    }
-    /**
-     * Parses the phone from the input string
-     */
-    public static Phone parsePhone(String input) throws ParseException {
-        if (Phone.isValidPhone(input)) {
-            return new Phone(input);
-        } else {
-            throw new InvalidInputException(input + " is not a valid phone number");
-        }
-    }
-    /**
-     * overloading parsePhone to take in flagName and parse the flag from the input string
-     */
-    public static Phone parsePhone(String flag, String input) throws ParseException {
-        return parsePhone(parseFlag(flag, input));
-    }
-
-    /**
-     * overloading to not throw exception if the flag is not found when isOptional is true
-     */
-    public static Phone parsePhone(String flag, String input, boolean isOptional) throws ParseException {
-        if (isOptional) {
-            try {
-                parseFlag(flag, input);
-            } catch (FlagNotFoundException e) {
-                return null;
-            }
-        }
-        return parsePhone(parseFlag(flag, input));
-    }
-
-    /**
-     * Parses the address from the input string
-     */
-    public static Address parseAddress(String input) throws ParseException {
-        if (Address.isValidAddress(input)) {
-            return new Address(input);
-        } else {
-            throw new InvalidInputException(input + " is not a valid address");
-        }
-    }
-
-    public static Address parseAddress(String flag, String input) throws ParseException {
-        return parseAddress(parseFlag(flag, input));
-    }
-
-    /**
-     * overloading to not throw exception if the flag is not found when isOptional is true
-     */
-    public static Address parseAddress(String flag, String input, boolean isOptional) throws ParseException {
-        if (isOptional) {
-            try {
-                parseFlag(flag, input);
-            } catch (FlagNotFoundException e) {
-                return null;
-            }
-        }
-        return parseAddress(parseFlag(flag, input));
-    }
-
-    /**
-     * Parses the name from the input string
-     */
-    public static Name parseName(String input) throws ParseException {
-        if (Name.isValidName(input)) {
-            return new Name(input);
-        } else {
-            throw new InvalidInputException(input + " is not a valid name");
-        }
-    }
-
-    public static Name parseName(String flag, String input) throws ParseException {
-        return parseName(parseFlag(flag, input));
-    }
-
-    /**
-     * overloading to not throw exception if the flag is not found when isOptional is true
-     */
-    public static Name parseName(String flag, String input, boolean isOptional) throws ParseException {
-        if (isOptional) {
-            try {
-                parseFlag(flag, input);
-            } catch (FlagNotFoundException e) {
-                return null;
-            }
-        }
-        return parseName(parseFlag(flag, input));
-    }
 
     /**
      * Parses the tags from the input string
@@ -513,5 +397,48 @@ public class TypeParsingUtil {
         } else {
             throw new FlagNotFoundException(errorFieldName + " not found");
         }
+    }
+
+    public static <T extends Parseable<T>> T parseTo(Class<T> parsedTo, String inputStr) throws ParseException {
+        Method isValid;
+        Method of;
+        try {
+            isValid = parsedTo.getMethod("isValid", String.class);
+        } catch (NoSuchMethodException e) {
+            throw new InternalErrorExcpetion("Internal error: " + parsedTo.getName() + " does not have static isValid method");
+        }
+        try {
+            of = parsedTo.getMethod("of", String.class);
+        } catch (NoSuchMethodException e) {
+            throw new InternalErrorExcpetion("Internal error: " + parsedTo.getName() + " does not have static of method");
+        }
+
+        try {
+            if ((boolean) isValid.invoke(null, inputStr)) {
+                Object o = of.invoke(null, inputStr);
+                if (parsedTo.isInstance(o)) {
+                    return parsedTo.cast(o);
+                } else {
+                    throw new InternalErrorExcpetion("Internal error: " + parsedTo.getName() + " of method does not return a " + parsedTo.getName());
+                }
+            } else {
+                throw new InvalidInputException(inputStr + " is not a valid " + parsedTo.getName());
+            }
+        } catch (Exception e) {
+            throw new InternalErrorExcpetion("Internal error: " + e.getMessage());
+        }
+    }
+    public static <T extends Parseable<T>> T parseTo(Class<T> parsedTo, String flagName, String inputStr) throws ParseException {
+        return parseTo(parsedTo, parseFlag(flagName, inputStr));
+    }
+    public static <T extends Parseable<T>> T parseTo(Class<T> parsedTo, String flagName, String inputStr, boolean isOptional) throws ParseException {
+        if (isOptional) {
+            try {
+                parseFlag(flagName, inputStr);
+            } catch (FlagNotFoundException e) {
+                return null;
+            }
+        }
+        return parseTo(parsedTo, parseFlag(flagName, inputStr));
     }
 }

@@ -1,5 +1,7 @@
 package seedu.address.model.person;
 
+import seedu.address.model.Parseable;
+
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -7,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Person's email in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidEmail(String)}
  */
-public class Email {
+public class Email implements Parseable<Email> {
     public static final Email DEFAULT_EMAIL = new Email();
     public static final String DEFAULT_EMAIL_MESSAGE = "To be added.";
     private static final String SPECIAL_CHARACTERS = "+_.-";
@@ -55,7 +57,12 @@ public class Email {
     public static boolean isValidEmail(String test) {
         return test.matches(VALIDATION_REGEX);
     }
-
+    public static Boolean isValid(String input) {
+        return isValidEmail(input);
+    }
+    public static Email of(String input) {
+        return new Email(input);
+    }
     @Override
     public String toString() {
         return value;

@@ -1,12 +1,14 @@
 package seedu.address.model.person;
 
+import seedu.address.model.Parseable;
+
 import static java.util.Objects.requireNonNull;
 
 /**
  * Represents a Person's remark in the address book.
  * Guarantees: immutable; is always valid
  */
-public class Remark {
+public class Remark implements Parseable<Remark> {
     public static final Remark DEFAULT_REMARK = new Remark("To be added");
 
     public final String value;
@@ -19,6 +21,12 @@ public class Remark {
     public Remark(String remark) {
         requireNonNull(remark);
         value = remark;
+    }
+    public static Boolean isValid(String input) {
+        return true;
+    }
+    public static Remark of(String input) {
+        return new Remark(input);
     }
 
     @Override

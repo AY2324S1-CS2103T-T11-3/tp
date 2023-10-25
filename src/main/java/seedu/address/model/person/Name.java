@@ -1,5 +1,7 @@
 package seedu.address.model.person;
 
+import seedu.address.model.Parseable;
+
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -7,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Person's name in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
-public class Name {
+public class Name implements Parseable<Name> {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Names should only contain alphanumeric characters and spaces, and it should not be blank";
@@ -37,7 +39,12 @@ public class Name {
     public static boolean isValidName(String test) {
         return test.matches(VALIDATION_REGEX);
     }
-
+    public static Boolean isValid(String input) {
+        return isValidName(input);
+    }
+    public static Name of(String input) {
+        return new Name(input);
+    }
 
     @Override
     public String toString() {

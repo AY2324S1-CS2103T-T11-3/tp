@@ -121,9 +121,9 @@ class TypeParsingUtilTest {
     @Test
     void parseAddressTest() {
         try {
-            Address a = TypeParsingUtil.parseAddress("address", "-address 123, Clementi Ave 3, #12,34");
+            Address a = TypeParsingUtil.parseTo(Address.class,"address", "-address 123, Clementi Ave 3, #12,34");
             assertEquals(a, new Address("123, Clementi Ave 3, #12,34"));
-            assertThrows(ParseException.class, () -> TypeParsingUtil.parseAddress("address", " address"));
+            assertThrows(ParseException.class, () -> TypeParsingUtil.parseTo(Address.class,"address", " address"));
         } catch (ParseException e) {
             fail(e.getMessage());
         }
@@ -132,9 +132,9 @@ class TypeParsingUtilTest {
     @Test
     void parseNameTest() {
         try {
-            assertEquals(TypeParsingUtil.parseName("name", "-name yiwen"),
+            assertEquals(TypeParsingUtil.parseTo(Name.class,"name", "-name yiwen"),
                     new Name("yiwen"));
-            assertThrows(ParseException.class, () -> TypeParsingUtil.parseEmail(" name"));
+            assertThrows(ParseException.class, () -> TypeParsingUtil.parseTo(Name.class," name"));
         } catch (ParseException e) {
             fail(e.getMessage());
         }
