@@ -8,10 +8,11 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Subject;
-
+import seedu.address.model.listEntries.Lesson;
+import seedu.address.model.listEntryFields.Name;
+import seedu.address.model.listEntries.Person;
+import seedu.address.model.listEntryFields.Subject;
+import seedu.address.model.lists.TaskList;
 
 
 class LessonTest {

@@ -6,7 +6,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import java.util.Arrays;
 
 import seedu.address.model.Model;
-import seedu.address.model.state.State;
+import seedu.address.model.State;
 
 /**
  * Lists all persons in the address book to the user.

@@ -5,8 +5,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
-import seedu.address.model.lessons.Lesson;
-import seedu.address.model.person.Person;
+import seedu.address.model.listEntries.Lesson;
+import seedu.address.model.listEntries.Person;
 
 /**
  * Container for user visible messages.
@@ -47,9 +47,9 @@ public class Messages {
                 .append("; Address: ")
                 .append(person.getAddress())
                 .append("; Subjects: ");
-        person.getSubjects().forEach(builder::append);
+        person.getSubjectsSet().forEach(builder::append);
         builder.append("; Tags: ");
-        person.getTags().forEach(builder::append);
+        person.getTagSet().forEach(builder::append);
         builder.append("; Remark: ")
                 .append(person.getRemark());
         return builder.toString();

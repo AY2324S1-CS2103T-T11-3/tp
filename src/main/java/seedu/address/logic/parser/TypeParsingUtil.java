@@ -12,11 +12,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.logic.parser.exceptions.*;
-import seedu.address.model.ListEntry;
-import seedu.address.model.Parseable;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Subject;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.listEntries.ListEntry;
+import seedu.address.model.listEntryFields.ListEntryField;
+import seedu.address.model.listEntryFields.Name;
+import seedu.address.model.listEntryFields.Subject;
+import seedu.address.model.listEntryFields.Tag;
 
 import static seedu.address.logic.ReflectionUtil.*;
 import static seedu.address.logic.ReflectionUtil.call;
@@ -438,41 +438,47 @@ public class TypeParsingUtil {
         return getValueImmediatelyAfterCommandName(commandWord, errorFieldName, input);
     }
 
-    public static <T extends Parseable> T parseTo(Class<T> parsedTo, String inputStr) throws ParseException {
+    public static <T extends ListEntryField> T parseTo(Class<T> parsedTo, String inputStr) throws ParseException {
         Method isValid;
         Method of;
         try {
             isValid = parsedTo.getMethod("isValid", String.class);
         } catch (NoSuchMethodException e) {
-            throw new InternalErrorExcpetion("Internal error: " + parsedTo.getName() + " does not have static isValid method");
+            throw new InternalErrorExcpetion("Internal error: " + parsedTo.getSimpleName() + " does not have static isValid method");
         }
         try {
             of = parsedTo.getMethod("of", String.class);
         } catch (NoSuchMethodException e) {
-            throw new InternalErrorExcpetion("Internal error: " + parsedTo.getName() + " does not have static of method");
+            throw new InternalErrorExcpetion("Internal error: " + parsedTo.getSimpleName() + " does not have static of method");
         }
-
+        boolean isValidResult;
         try {
-            if ((boolean) isValid.invoke(null, inputStr)) {
-                Object o = of.invoke(null, inputStr);
-                if (parsedTo.isInstance(o)) {
-                    return parsedTo.cast(o);
-                } else {
-                    throw new InternalErrorExcpetion("Internal error: " + parsedTo.getName() + " of method does not return a " + parsedTo.getName());
-                }
-            } else {
-                throw new InvalidInputException(inputStr + " is not a valid " + parsedTo.getName());
-            }
+            isValidResult = (boolean) isValid.invoke(null, inputStr);
         } catch (Exception e) {
             throw new InternalErrorExcpetion("Internal error: " + e.getMessage());
         }
+        if (isValidResult) {
+            Object o;
+            try {
+                o = of.invoke(null, inputStr);
+            } catch (Exception e) {
+                throw new InternalErrorExcpetion("Internal error: " + e.getMessage());
+            }
+            if (parsedTo.isInstance(o)) {
+                return parsedTo.cast(o);
+            } else {
+                throw new InternalErrorExcpetion("Internal error: " + parsedTo.getSimpleName() + " of method does not return a " + parsedTo.getSimpleName());
+            }
+        } else {
+            throw new InvalidInputException("input string: '" + inputStr + "' is not a valid " + parsedTo.getSimpleName());
+        }
     }
 
-    public static <T extends Parseable> T parseTo(Class<T> parsedTo, String flagName, String inputStr) throws ParseException {
+    public static <T extends ListEntryField> T parseTo(Class<T> parsedTo, String flagName, String inputStr) throws ParseException {
         return parseTo(parsedTo, parseFlag(flagName, inputStr));
     }
 
-    public static <T extends Parseable> T parseTo(Class<T> parsedTo, String flagName, String inputStr, boolean isOptional) throws ParseException {
+    public static <T extends ListEntryField> T parseTo(Class<T> parsedTo, String flagName, String inputStr, boolean isOptional) throws ParseException {
         if (isOptional) {
             try {
                 parseFlag(flagName, inputStr);
@@ -487,19 +493,24 @@ public class TypeParsingUtil {
     public static ListEntry parseToListEntry(Class<? extends ListEntry> listEntryClass, String inputStr) throws ParseException {
         try {
             String fieldName;
-            ListEntry defaultEntry = (ListEntry) call(listEntryClass, "getDefault" + listEntryClass.getSimpleName());
+            String flagName;
+            ListEntry defaultEntry = (ListEntry) staticCall(listEntryClass, "getDefault" + listEntryClass.getSimpleName());
             for (Field field : getPrivateFields(listEntryClass)) {
                 fieldName = capitaliseFieldName(field);
+                flagName = fieldName.toLowerCase();
                 if (fieldName.equals("Name")) {
-                    call(defaultEntry, "setNameIfNotNull", parseTo(Name.class, inputStr));
+                    call(defaultEntry, "setNameIfNotDefault", parseTo(Name.class, flagName, inputStr));
                 } else {
-                    String setter = "set" + fieldName + "IfNotNull";
-                    call(defaultEntry, setter, parseTo((Class<? extends Parseable>) field.getType(), inputStr));
+                    String setter = "set" + fieldName + "IfNotDefault";
+                    Object o = parseTo((Class<? extends ListEntryField>) field.getType(), flagName,inputStr,true);
+                    if (o != null) {
+                        call(defaultEntry, setter, o);
+                    }
                 }
             }
             return defaultEntry;
         } catch (Exception e) {
-            throw new ParseException("Error parsing GenericAddCommand for " + listEntryClass.getSimpleName() + "." + e.getMessage());
+            throw new ParseException(e.getMessage());
         }
     }
 

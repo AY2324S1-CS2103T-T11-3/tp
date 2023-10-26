@@ -7,14 +7,14 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.lessons.Lesson;
-import seedu.address.model.lessons.TaskList;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Subject;
+import seedu.address.model.listEntries.Lesson;
+import seedu.address.model.lists.TaskList;
+import seedu.address.model.listEntryFields.Name;
+import seedu.address.model.listEntryFields.Subject;
 
 
 /**
- * Jackson-friendly version of {@link seedu.address.model.lessons.Lesson}
+ * Jackson-friendly version of {@link Lesson}
  */
 public class JsonAdaptedLesson {
     private final String start;
@@ -35,7 +35,6 @@ public class JsonAdaptedLesson {
         this.subject = subject;
         this.students = students;
         this.taskList = taskList;
-
     }
 
     /**

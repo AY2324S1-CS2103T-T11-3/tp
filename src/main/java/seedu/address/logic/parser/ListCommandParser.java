@@ -7,7 +7,7 @@ import java.util.Arrays;
 
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.state.State;
+import seedu.address.model.State;
 
 /**
  * Parses input arguments and creates a new ListCommand object

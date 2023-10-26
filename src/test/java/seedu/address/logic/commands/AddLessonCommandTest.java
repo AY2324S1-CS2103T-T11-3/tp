@@ -12,9 +12,9 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.lessons.Lesson;
-import seedu.address.model.lessons.TaskList;
-import seedu.address.model.person.Name;
+import seedu.address.model.listEntries.Lesson;
+import seedu.address.model.lists.TaskList;
+import seedu.address.model.listEntryFields.Name;
 
 
 class AddLessonCommandTest {

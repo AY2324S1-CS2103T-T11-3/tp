@@ -2,8 +2,9 @@ package seedu.address.logic.parser;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.lessons.Lesson;
-import seedu.address.model.person.*;
+import seedu.address.model.listEntries.Lesson;
+import seedu.address.model.listEntries.Person;
+import seedu.address.model.listEntryFields.*;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -44,12 +45,12 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public static Person parsePerson(String args) throws ParseException {
         Person person = new Person(TypeParsingUtil.parseTo(Name.class,"name", args));
-        person.setPhoneIfNotNull(TypeParsingUtil.parseTo(Phone.class,"phone", args, true));
-        person.setEmailIfNotNull(TypeParsingUtil.parseTo(Email.class,"email", args, true));
-        person.setAddressIfNotNull(TypeParsingUtil.parseTo(Address.class,"address", args, true));
-        person.setSubjectsIfNotNull(TypeParsingUtil.parseSubjects("subject", args, true));
-        person.setTagsIfNotNull(TypeParsingUtil.parseTags("tag", args, true));
-        person.setRemarkIfNotNull(TypeParsingUtil.parseTo(Remark.class,"remark", args, true));
+        person.setPhoneIfNotDefault(TypeParsingUtil.parseTo(Phone.class,"phone", args, true));
+        person.setEmailIfNotDefault(TypeParsingUtil.parseTo(Email.class,"email", args, true));
+        person.setAddressIfNotDefault(TypeParsingUtil.parseTo(Address.class,"address", args, true));
+        person.setSubjectsIfNotDefault(TypeParsingUtil.parseSubjects("subject", args, true));
+        person.setTagsIfNotDefault(TypeParsingUtil.parseTags("tag", args, true));
+        person.setRemarkIfNotDefault(TypeParsingUtil.parseTo(Remark.class,"remark", args, true));
         return person;
     }
 }

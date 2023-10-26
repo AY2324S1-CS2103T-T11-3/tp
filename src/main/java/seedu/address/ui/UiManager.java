@@ -11,8 +11,8 @@ import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
-import seedu.address.model.lessons.Lesson;
-import seedu.address.model.person.Person;
+import seedu.address.model.listEntries.Lesson;
+import seedu.address.model.listEntries.Person;
 
 /**
  * The manager of the UI component.

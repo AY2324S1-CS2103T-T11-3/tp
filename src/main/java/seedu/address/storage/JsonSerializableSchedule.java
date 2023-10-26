@@ -11,11 +11,12 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.ReadOnlySchedule;
 import seedu.address.model.ScheduleList;
-import seedu.address.model.lessons.Lesson;
+import seedu.address.model.listEntries.Lesson;
+import seedu.address.model.lists.Schedule;
 
 
 /**
- * Jackson-friendly version of {@link seedu.address.model.lessons.Schedule}
+ * Jackson-friendly version of {@link Schedule}
  */
 @JsonRootName(value = "schedule")
 public class JsonSerializableSchedule {

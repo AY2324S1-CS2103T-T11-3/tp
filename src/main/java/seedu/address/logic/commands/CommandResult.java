@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.state.State;
+import seedu.address.model.State;
 
 /**
  * Represents the result of a command execution.

@@ -18,9 +18,9 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.lessons.Lesson;
-import seedu.address.model.person.Person;
-import seedu.address.model.state.State;
+import seedu.address.model.listEntries.Lesson;
+import seedu.address.model.listEntries.Person;
+import seedu.address.model.State;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for

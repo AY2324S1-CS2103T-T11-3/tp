@@ -5,7 +5,7 @@ import java.util.Comparator;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
-import seedu.address.model.person.Person;
+import seedu.address.model.listEntries.Person;
 
 
 /**
@@ -65,14 +65,14 @@ public class PersonCardFieldBuilder {
 
     static void buildTags(Person person, VBox fields, FlowPane tags) {
         //why creating a new pane tags and push to fields does not work?
-        person.getTags().stream()
+        person.getTagSet().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
     static void buildSubjects(Person person, VBox fields, FlowPane tags) {
         FlowPane subjects = new FlowPane();
-        person.getSubjects().stream()
+        person.getSubjectsSet().stream()
                 .sorted(Comparator.comparing(subject -> subject.subjectName))
                 .forEach(subject -> subjects.getChildren()
                         .add(new ColoredTextEntry(subject.subjectName.toString(), subject.getColour())));

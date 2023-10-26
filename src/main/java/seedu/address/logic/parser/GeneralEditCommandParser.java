@@ -2,7 +2,7 @@ package seedu.address.logic.parser;
 
 import seedu.address.logic.commands.GeneralEditCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.ListEntry;
+import seedu.address.model.listEntries.ListEntry;
 
 import static seedu.address.logic.parser.TypeParsingUtil.getValueImmediatelyAfterCommandName;
 

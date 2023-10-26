@@ -10,17 +10,17 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlySchedule;
 import seedu.address.model.ScheduleList;
-import seedu.address.model.lessons.Lesson;
-import seedu.address.model.lessons.Task;
-import seedu.address.model.lessons.TaskList;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Remark;
-import seedu.address.model.person.Subject;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.listEntries.Lesson;
+import seedu.address.model.listEntries.Task;
+import seedu.address.model.lists.TaskList;
+import seedu.address.model.listEntryFields.Address;
+import seedu.address.model.listEntryFields.Email;
+import seedu.address.model.listEntryFields.Name;
+import seedu.address.model.listEntries.Person;
+import seedu.address.model.listEntryFields.Phone;
+import seedu.address.model.listEntryFields.Remark;
+import seedu.address.model.listEntryFields.Subject;
+import seedu.address.model.listEntryFields.Tag;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.

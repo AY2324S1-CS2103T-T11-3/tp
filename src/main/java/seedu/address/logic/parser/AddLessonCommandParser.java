@@ -6,10 +6,10 @@ import java.time.LocalTime;
 
 import seedu.address.logic.commands.AddLessonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.lessons.Lesson;
-import seedu.address.model.lessons.TaskList;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Subject;
+import seedu.address.model.listEntries.Lesson;
+import seedu.address.model.lists.TaskList;
+import seedu.address.model.listEntryFields.Name;
+import seedu.address.model.listEntryFields.Subject;
 
 
 

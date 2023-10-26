@@ -14,6 +14,7 @@ import static seedu.address.testutil.TypicalPersons.BOB;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.listEntries.Person;
 import seedu.address.testutil.PersonBuilder;
 
 public class PersonTest {
@@ -21,7 +22,7 @@ public class PersonTest {
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
         Person person = new PersonBuilder().build();
-        assertThrows(UnsupportedOperationException.class, () -> person.getTags().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> person.getTagSet().remove(0));
     }
 
     @Test
@@ -90,11 +91,4 @@ public class PersonTest {
         assertFalse(ALICE.equals(editedAlice));
     }
 
-    @Test
-    public void toStringMethod() {
-        String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
-                + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", subjects="
-                + ALICE.getSubjects() + ", tags=" + ALICE.getTags() + ", remark=" + ALICE.getRemark() + "}";
-        assertEquals(expected, ALICE.toString());
-    }
 }

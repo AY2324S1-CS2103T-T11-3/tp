@@ -6,8 +6,8 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.lessons.Lesson;
-import seedu.address.model.lessons.Schedule;
+import seedu.address.model.listEntries.Lesson;
+import seedu.address.model.lists.Schedule;
 
 /**
  * Wraps all data at the schedule-list level

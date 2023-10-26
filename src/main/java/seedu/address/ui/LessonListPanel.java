@@ -11,7 +11,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
-import seedu.address.model.lessons.Lesson;
+import seedu.address.model.listEntries.Lesson;
 
 /**
  * Panel containing the schedule.

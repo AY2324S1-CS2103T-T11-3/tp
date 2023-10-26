@@ -5,9 +5,10 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.lessons.Lesson;
-import seedu.address.model.person.Person;
-import seedu.address.model.state.State;
+import seedu.address.model.listEntries.Lesson;
+import seedu.address.model.listEntries.ListEntry;
+import seedu.address.model.listEntries.Task;
+import seedu.address.model.listEntries.Person;
 import seedu.address.ui.Ui;
 
 /**
@@ -79,6 +80,7 @@ public interface Model {
      * Returns true if a person with the same identity as {@code person} exists in the address book.
      */
     boolean hasPerson(Person person);
+    Boolean hasPersonClashWith(Person person);
 
     /**
      * Deletes the given person.
@@ -107,7 +109,7 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
-
+    void updateFilteredPersonList();
     /**
      * Shows the details of the given person.
      * The person must exist in the address book.
@@ -118,7 +120,7 @@ public interface Model {
      */
     boolean hasLesson(Lesson lesson);
 
-    boolean hasLessonClashWith(Lesson lesson);
+    Boolean hasLessonClashWith(Lesson lesson);
 
     Lesson getLessonClashWith(Lesson lesson);
 
@@ -147,12 +149,14 @@ public interface Model {
      */
     void showLesson(Lesson lessonToShow); //TODO
     ObservableList<Lesson> getFilteredScheduleList();
-
+    ObservableList<Lesson> getFilteredLessonList();
     /**
      * Updates the filter of the filtered lesson list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredScheduleList(Predicate<Lesson> predicate);
+    void updateFilteredLessonList(Predicate<Lesson> predicate);
+    void updateFilteredLessonList();
 
     /**
      * Links the Ui of the Application.
@@ -176,16 +180,30 @@ public interface Model {
      */
     boolean sameState(State state);
 
+    public Class<? extends ListEntry> getCurrentlyDisplayedClass();
+    public boolean hasCurrentShownEntry();
+
+    // todo: implement everything below here properly
     /**
      * Gets the current shown entry.
      * @return person or lesson or task currently shown
      */
-    default ListEntry getCurrentShownEntry() {
-        // todo: implement this properly
-        return Person.getDefaultPerson();
+    ListEntry getCurrentShownEntry();
+    ObservableList<? extends ListEntry> getCurrentShownList();
+    default ObservableList<Task> getFilteredTaskList() {
+        return null;
     }
-    default ObservableList<? extends ListEntry> getCurrentShownList() {
-        // todo: implement this properly
-        return getFilteredPersonList();
+    default void setTask(Task target, Task editedTask) {
+    }
+    default void addTask(Task task) {
+    }
+    default void deleteTask(Task target) {
+    }
+    default void updateFilteredTaskList(Predicate<Task> predicate) {
+    }
+    default void updateFilteredTaskList() {
+    }
+    default Boolean hasTaskClashWith(Task task) {
+        return null;
     }
 }

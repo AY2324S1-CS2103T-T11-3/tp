@@ -10,15 +10,15 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.lessons.Lesson;
-import seedu.address.model.lessons.TaskList;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Subject;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.listEntries.Lesson;
+import seedu.address.model.lists.TaskList;
+import seedu.address.model.listEntryFields.Address;
+import seedu.address.model.listEntryFields.Email;
+import seedu.address.model.listEntryFields.Name;
+import seedu.address.model.listEntries.Person;
+import seedu.address.model.listEntryFields.Phone;
+import seedu.address.model.listEntryFields.Subject;
+import seedu.address.model.listEntryFields.Tag;
 
 
 
@@ -66,8 +66,8 @@ public class AddCommandParserTest {
             expectedPerson.setPhone(new Phone("12345678"));
             expectedPerson.setEmail(new Email("email@u.com"));
             expectedPerson.setAddress(new Address("Blk 123, Clementi Ave 3, #12,34"));
-            expectedPerson.setTagsIfNotNull(Set.of(new Tag("friends")));
-            expectedPerson.setSubjectsIfNotNull(Set.of(new Subject("English")));
+            expectedPerson.setTagsIfNotDefault(Set.of(new Tag("friends")));
+            expectedPerson.setSubjectsIfNotDefault(Set.of(new Subject("English")));
             assertEquals(expectedPerson, actualPerson);
         } catch (ParseException e) {
             fail();

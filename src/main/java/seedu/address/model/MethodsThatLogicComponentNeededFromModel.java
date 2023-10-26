@@ -1,61 +1,30 @@
 package seedu.address.model;
 
 import javafx.collections.ObservableList;
-import javafx.concurrent.Task;
-import seedu.address.model.lessons.Lesson;
-import seedu.address.model.person.Person;
+import seedu.address.model.listEntries.Lesson;
+import seedu.address.model.listEntries.ListEntry;
+import seedu.address.model.listEntries.Task;
+import seedu.address.model.listEntries.Person;
 
 public interface MethodsThatLogicComponentNeededFromModel {
-    /*
-
-    private void init(Model model) throws CommandException {
-        if (original == null) {
-            if (index == null) {
-                original = model.getCurrentShownEntry();
-            } else {
-                Object returned = call(model, "getFiltered"+className+"List", index);
-                if (!(returned instanceof List)) {
-                    throw new CommandException("Error calling getFiltered"+className+"List(index) in model.");
-                } else {
-                    Integer size = (Integer) call(returned, "size");
-                    if (index < 1 || index - 1 >= size) {
-                        throw new CommandException("Index out of bounds, expected 1 to " + size + " but got " + index + ".");
-                    }
-                    original = (ListEntry) call(returned, "get", index);
-                }
-            }
-
-        }
-            cloned = original.clone();
-    }
-    private void editFields(Model model) throws CommandException {
-        for (String fieldName: getCapitalisedPrivateFieldNames(original)) {
-            String setter = "set" + fieldName + "IfNotNull";
-            String getter = "get" + fieldName;
-            call(cloned, setter, call(editedFieldsHolder, getter));
-        }
-    }
-    private void validateEdited(Model model) throws CommandException {
-        if (cloned.equals(original)) {
-            throw new CommandException("No change detected.");
-        }
-
-        if (!cloned.getName().equals(original.getName())) {
-            boolean hasNameCollision = (boolean) call(model, "has" + className, cloned);
-            if (hasNameCollision) {
-                throw new CommandException("Entry with the same name already exists.");
-            }
-        }
-    }
-    private void writeBack(Model model) throws CommandException {
-        call(model, "set" + className, original, cloned);
-        call(model, "updateFiltered" + className + "List",
-                staticCall(model,"PREDICATE_SHOW_ALL_" + className.toUpperCase() + "S"));
-    }
-
-     */
     ObservableList<Person> getFilteredPersonList();
     ObservableList<Lesson> getFilteredLessonList();
     ObservableList<Task> getFilteredTaskList();
-
+    void setPerson(Person target, Person editedPerson);
+    void setLesson(Lesson target, Lesson editedLesson);
+    void setTask(Task target, Task editedTask);
+    void addPerson(Person person);
+    void addLesson(Lesson lesson);
+    void addTask(Task task);
+    void deletePerson(Person target);
+    void deleteLesson(Lesson target);
+    void deleteTask(Task target);
+    void updateFilteredPersonList();
+    void updateFilteredLessonList();
+    void updateFilteredTaskList();
+    Boolean hasPersonClashWith(Person person);
+    Boolean hasLessonClashWith(Lesson lesson);
+    Boolean hasTaskClashWith(Task task);
+    ListEntry getCurrentShownEntry();
+    ObservableList<? extends ListEntry> getCurrentShownList();
 }

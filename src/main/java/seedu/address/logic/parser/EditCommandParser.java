@@ -4,13 +4,13 @@ import java.util.Set;
 
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Remark;
-import seedu.address.model.person.Subject;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.listEntryFields.Address;
+import seedu.address.model.listEntryFields.Email;
+import seedu.address.model.listEntryFields.Name;
+import seedu.address.model.listEntryFields.Phone;
+import seedu.address.model.listEntryFields.Remark;
+import seedu.address.model.listEntryFields.Subject;
+import seedu.address.model.listEntryFields.Tag;
 
 /**
  * Parses input arguments and creates a new EditCommand object

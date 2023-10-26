@@ -10,14 +10,14 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Remark;
-import seedu.address.model.person.Subject;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.listEntryFields.Address;
+import seedu.address.model.listEntryFields.Email;
+import seedu.address.model.listEntryFields.Name;
+import seedu.address.model.listEntries.Person;
+import seedu.address.model.listEntryFields.Phone;
+import seedu.address.model.listEntryFields.Remark;
+import seedu.address.model.listEntryFields.Subject;
+import seedu.address.model.listEntryFields.Tag;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -64,10 +64,10 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
-        subjects.addAll(source.getSubjects()
+        subjects.addAll(source.getSubjectsSet()
                 .stream().map(JsonAdaptedSubject::new)
                 .collect(Collectors.toList()));
-        tags.addAll(source.getTags().stream()
+        tags.addAll(source.getTagSet().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
         remark = source.getRemark().value;

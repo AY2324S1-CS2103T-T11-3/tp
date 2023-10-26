@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.lessons.Task;
+import seedu.address.model.listEntries.Task;
 
 /**
  * A UI component that displays information of a {@code Task}.
@@ -37,7 +37,7 @@ public class TaskCard extends UiPart<Region> {
         super(FXML);
         this.task = task;
         id.setText(displayedIndex + ". ");
-        desc.setText(task.getDescription());
+        desc.setText(task.getDescription().toString());
     }
 
 }

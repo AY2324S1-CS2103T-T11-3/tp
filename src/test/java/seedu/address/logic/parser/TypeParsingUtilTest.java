@@ -3,7 +3,11 @@ package seedu.address.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
+import static seedu.address.logic.ReflectionUtil.*;
+import static seedu.address.logic.ReflectionUtil.call;
+import static seedu.address.logic.parser.TypeParsingUtil.*;
 
+import java.lang.reflect.Field;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
@@ -11,18 +15,22 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Name;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.listEntries.Lesson;
+import seedu.address.model.listEntries.ListEntry;
+import seedu.address.model.listEntries.Person;
+import seedu.address.model.listEntryFields.Address;
+import seedu.address.model.listEntryFields.ListEntryField;
+import seedu.address.model.listEntryFields.Name;
+import seedu.address.model.listEntryFields.Tag;
 
 class TypeParsingUtilTest {
     @Test
     void parseFlagTest() {
-        assertThrows(ParseException.class, () -> TypeParsingUtil.parseFlag("num", "hello"));
-        assertThrows(ParseException.class, () -> TypeParsingUtil.parseFlag("hello", "hello 123"));
+        assertThrows(ParseException.class, () -> parseFlag("num", "hello"));
+        assertThrows(ParseException.class, () -> parseFlag("hello", "hello 123"));
         try {
-            assertEquals(TypeParsingUtil.parseFlag("index", "-index 123"), "123");
-            assertEquals(TypeParsingUtil.parseFlag("index", "-index 123 -email email"), "123");
+            assertEquals(parseFlag("index", "-index 123"), "123");
+            assertEquals(parseFlag("index", "-index 123 -email email"), "123");
         } catch (ParseException e) {
             fail(e.getMessage());
         }
@@ -121,9 +129,9 @@ class TypeParsingUtilTest {
     @Test
     void parseAddressTest() {
         try {
-            Address a = TypeParsingUtil.parseTo(Address.class,"address", "-address 123, Clementi Ave 3, #12,34");
+            Address a = parseTo(Address.class,"address", "-address 123, Clementi Ave 3, #12,34");
             assertEquals(a, new Address("123, Clementi Ave 3, #12,34"));
-            assertThrows(ParseException.class, () -> TypeParsingUtil.parseTo(Address.class,"address", " address"));
+            assertThrows(ParseException.class, () -> parseTo(Address.class,"address", " address"));
         } catch (ParseException e) {
             fail(e.getMessage());
         }
@@ -132,9 +140,9 @@ class TypeParsingUtilTest {
     @Test
     void parseNameTest() {
         try {
-            assertEquals(TypeParsingUtil.parseTo(Name.class,"name", "-name yiwen"),
+            assertEquals(parseTo(Name.class,"name", "-name yiwen"),
                     new Name("yiwen"));
-            assertThrows(ParseException.class, () -> TypeParsingUtil.parseTo(Name.class," name"));
+            assertThrows(ParseException.class, () -> parseTo(Name.class," name"));
         } catch (ParseException e) {
             fail(e.getMessage());
         }
@@ -148,6 +156,18 @@ class TypeParsingUtilTest {
             assertEquals(TypeParsingUtil.parseTags("tag", "-tag friends"), tags);
             assertThrows(ParseException.class, () -> TypeParsingUtil.parseTags("tag", "-tag friends, friends"));
         } catch (ParseException e) {
+            fail(e.getMessage());
+        }
+    }
+    @Test
+    void parseToListEntryTest() {
+        try {
+            String inputStr = "-name yiwen -phone 123 -email email@domain.com -address 123, Clementi Ave 3, #12,34 "
+                    + "-subject english -subject chinese -tag friends -tag family -remark remark";
+            parseToListEntry(Person.class, "-name yiwen");
+            parseToListEntry(Person.class, inputStr);
+            String inputStr2 = "-name lesson123 -start 14:30 -end 17:30 -day 2023/12/30 -subject english";
+        } catch (Exception e) {
             fail(e.getMessage());
         }
     }

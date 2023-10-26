@@ -11,9 +11,10 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.lessons.Lesson;
-import seedu.address.model.person.Person;
-import seedu.address.model.state.State;
+import seedu.address.model.listEntries.Lesson;
+import seedu.address.model.listEntries.ListEntry;
+import seedu.address.model.listEntries.Person;
+import seedu.address.model.listEntries.Task;
 import seedu.address.ui.Ui;
 
 /**
@@ -31,6 +32,7 @@ public class ModelManager implements Model {
     private State state = State.SCHEDULE; // Default state of app. Can be either SCHEDULE or STUDENTS
     private Person currentShowingPerson = null;
     private Lesson currentShowingLesson = null;
+    private Task currentShowingTask = null;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -154,6 +156,11 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+    public void updateFilteredPersonList() {
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+
     //=========== ScheduleList ================================================================================
 
     @Override
@@ -177,7 +184,7 @@ public class ModelManager implements Model {
      * @param lesson The lesson to check
      * @return true if the lessons clash
      */
-    public boolean hasLessonClashWith(Lesson lesson) {
+    public Boolean hasLessonClashWith(Lesson lesson) {
         requireNonNull(lesson);
         return scheduleList.hasLessonClashWith(lesson);
     }
@@ -195,7 +202,7 @@ public class ModelManager implements Model {
     @Override
     public void addLesson(Lesson lesson) {
         scheduleList.addLesson(lesson);
-        //updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
+        updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
     }
 
     @Override
@@ -279,4 +286,41 @@ public class ModelManager implements Model {
         return this.state.equals(state);
     }
 
+    public void updateFilteredLessonList(Predicate<Lesson> predicate) {
+        updateFilteredScheduleList(predicate);
+    }
+    public void updateFilteredLessonList() {
+        updateFilteredScheduleList(PREDICATE_SHOW_ALL_LESSONS);
+    }
+    public ObservableList<Lesson> getFilteredLessonList() {
+        return getFilteredScheduleList();
+    }
+
+    public Boolean hasPersonClashWith(Person person) {
+        return this.hasPerson(person);
+    }
+
+    public ListEntry getCurrentShownEntry() {
+        // todo: implement this properly
+        return Person.getDefaultPerson();
+    }
+
+    public ObservableList<? extends ListEntry> getCurrentShownList() {
+        // todo: implement this properly
+        return getFilteredPersonList();
+    }
+
+    public Class<? extends ListEntry> getCurrentlyDisplayedClass() {
+        switch (state) {
+        case SCHEDULE:
+            return Lesson.class;
+        case STUDENT:
+            return Person.class;
+        default:
+            return Task.class;
+        }
+    }
+    public boolean hasCurrentShownEntry() {
+        return currentShowingLesson != null || currentShowingPerson != null || currentShowingTask != null;
+    }
 }

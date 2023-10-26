@@ -10,7 +10,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
-import seedu.address.model.person.Person;
+import seedu.address.model.listEntries.Person;
 
 /**
  * Panel containing a student's details.
@@ -67,10 +67,10 @@ public class StudentDetailListPanel extends UiPart<Region> {
         tags.getChildren().clear();
         subjects.getChildren().clear();
 
-        person.getTags().stream()
+        person.getTagSet().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        person.getSubjects().stream()
+        person.getSubjectsSet().stream()
                 .sorted(Comparator.comparing(subject -> subject.subjectName))
                 .forEach(subject -> subjects.getChildren()
                         .add(new ColoredTextEntry(subject.subjectName.toString(), subject.getColour())));
