@@ -1,10 +1,12 @@
 package seedu.address.logic;
 
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.listEntries.ListEntry;
 import seedu.address.model.listEntryFields.ListEntryField;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.function.Predicate;
@@ -32,8 +34,8 @@ public class ReflectionUtil {
             throw new CommandException("Access denied for method " + methodName + " for class " + obj.getClass().getSimpleName());
         } catch (IllegalArgumentException e){
             throw new CommandException("Illegal argument for method " + methodName + " for class " + obj.getClass().getSimpleName());
-        } catch (Exception e) {
-            throw new CommandException("Error invoking method " + methodName + " for class " + obj.getClass().getSimpleName());
+        } catch (InvocationTargetException e) {
+            throw new CommandException("start time cannot be after end time");
         }
     }
     public static Object staticCall(Class<?> clazz, String methodName, Object... args) throws CommandException {
@@ -46,8 +48,8 @@ public class ReflectionUtil {
             throw new CommandException("Access denied for method " + methodName + " for class " + clazz.getSimpleName());
         } catch (IllegalArgumentException e){
             throw new CommandException("Illegal argument for method " + methodName + " for class " + clazz.getSimpleName());
-        } catch (Exception e) {
-            throw new CommandException("Error invoking method " + methodName + " for class " + clazz.getSimpleName());
+        } catch (InvocationTargetException e) {
+            throw new CommandException(e.getMessage());
         }
     }
 

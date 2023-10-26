@@ -13,6 +13,7 @@ import seedu.address.model.exceptions.DuplicateLessonException;
 import seedu.address.model.exceptions.LessonNotFoundException;
 import seedu.address.model.listEntries.Lesson;
 import seedu.address.model.exceptions.DuplicatePersonException;
+import seedu.address.model.listEntryFields.Day;
 
 
 /**
@@ -206,8 +207,11 @@ public class Schedule implements Iterable<Lesson> {
     class LessonComparator implements Comparator<Lesson> {
         @Override
         public int compare(Lesson lesson1, Lesson lesson2) {
-            return lesson1.getStart()
-                    .compareTo(lesson2.getStart());
+            if (lesson1.getDay().equals(lesson2.getDay())) {
+                return lesson1.getStart().compareTo(lesson2.getStart());
+            } else {
+                return lesson1.getDay().compareTo(lesson2.getDay());
+            }
         }
     }
 }

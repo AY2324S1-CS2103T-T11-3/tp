@@ -6,6 +6,8 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalLessons.getTypicalScheduleList;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.List;
@@ -23,38 +25,22 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.util.NameContainsKeywordsPredicate;
 
 public class AddressBookParserTest {
+    Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalScheduleList());
 
-    private final AddressBookParser parser = new AddressBookParser();
+
+    private final AddressBookParser parser = new AddressBookParser(model);
 
     @Test
     public void parseCommand_clear() throws Exception {
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
     }
-
-    @Test
-    public void parseCommand_add() throws Exception {
-        assertTrue(parser.parseCommand(AddCommand.COMMAND_WORD + " -name Yiwen") instanceof AddCommand);
-        assertTrue(parser.parseCommand(AddCommand.COMMAND_WORD + " -name Yiwen -phone 12345678") instanceof AddCommand);
-    }
-
-    @Test
-    public void parseCommand_addLesson() throws Exception {
-        assertTrue(parser
-                .parseCommand(AddLessonCommand.COMMAND_WORD
-                        + " -name Yiwen -start 14:30 -end 17:30") instanceof AddLessonCommand);
-    }
-    @Test
-    public void parseCommand_edit() throws Exception {
-        assertTrue(parser
-                .parseCommand(EditCommand.COMMAND_WORD + " 1 -name Yiwen") instanceof EditCommand);
-        assertTrue(parser
-                .parseCommand(EditCommand.COMMAND_WORD + " 1 -name Yiwen -phone 12345678") instanceof EditCommand);
-    }
-
 
     @Test
     public void parseCommand_delete() throws Exception {

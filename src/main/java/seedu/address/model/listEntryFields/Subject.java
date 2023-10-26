@@ -65,7 +65,7 @@ public class Subject extends ListEntryField {
      */
     public static boolean isValidSubject(String test) {
         try {
-            Subjects subject = Subjects.valueOf(test);
+            Subjects subject = Subjects.valueOf(test.toUpperCase());
             return true;
         } catch (IllegalArgumentException e) {
             return false;
@@ -79,7 +79,7 @@ public class Subject extends ListEntryField {
     /**
      * Returns the subject parsed from a string.
      */
-    public static Subject parseSubject(String test) throws IllegalArgumentException {
+    public static Subject of(String test) throws IllegalArgumentException {
         return new Subject(test);
     }
 
@@ -97,7 +97,7 @@ public class Subject extends ListEntryField {
         if (subjectName == Subjects.NONE) {
             return "To be added";
         }
-        return '[' + subjectName.toString() + ']';
+        return subjectName.toString();
     }
 
     @Override
@@ -127,6 +127,4 @@ public class Subject extends ListEntryField {
     public Subject clone() {
         return new Subject(subjectName.toString());
     }
-
-
 }

@@ -122,6 +122,7 @@ public class ModelManager implements Model {
     @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
@@ -134,7 +135,7 @@ public class ModelManager implements Model {
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
         addressBook.setPerson(target, editedPerson);
-
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
 
@@ -197,6 +198,7 @@ public class ModelManager implements Model {
     @Override
     public void deleteLesson(Lesson target) {
         scheduleList.removeLesson(target);
+        updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
     }
 
     @Override
@@ -210,6 +212,7 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedLesson);
 
         scheduleList.setLesson(target, editedLesson);
+        updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
     }
 
     //=========== Filtered Lesson List Accessors =============================================================
@@ -301,13 +304,26 @@ public class ModelManager implements Model {
     }
 
     public ListEntry getCurrentShownEntry() {
-        // todo: implement this properly
-        return Person.getDefaultPerson();
+        switch (state) {
+        case SCHEDULE:
+            return currentShowingLesson;
+        case STUDENT:
+            return currentShowingPerson;
+        default:
+            return currentShowingTask;
+        }
     }
 
     public ObservableList<? extends ListEntry> getCurrentShownList() {
-        // todo: implement this properly
-        return getFilteredPersonList();
+        switch (state) {
+        case SCHEDULE:
+            return getFilteredLessonList();
+        case STUDENT:
+            return getFilteredPersonList();
+        default:
+            //return getFilteredTaskList();
+            return null;
+        }
     }
 
     public Class<? extends ListEntry> getCurrentlyDisplayedClass() {

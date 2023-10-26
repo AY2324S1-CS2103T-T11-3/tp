@@ -13,7 +13,7 @@ public class GeneralEditCommandParser implements Parser<GeneralEditCommand> {
     }
     public GeneralEditCommand parse(String commandText) throws ParseException {
         String indexString = getValueImmediatelyAfterCommandName("edit", "index", commandText, true);
-        ListEntry toEdit = TypeParsingUtil.parseToListEntry(listEntryClass, commandText);
+        ListEntry toEdit = TypeParsingUtil.parseToListEntry(listEntryClass, commandText, true);
         if (indexString != null) {
             Integer index = TypeParsingUtil.parseNum(indexString);
             return new GeneralEditCommand(toEdit, index);

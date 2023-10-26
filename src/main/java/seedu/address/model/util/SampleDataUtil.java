@@ -4,8 +4,10 @@ import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlySchedule;
@@ -79,25 +81,18 @@ public class SampleDataUtil {
     }
 
     public static Lesson[] getSampleLessons() {
-        LocalDateTime startLesson1 = LocalDateTime.of(2022, 10, 10, 14, 30);
-        LocalDateTime endLesson1 = LocalDateTime.of(2022, 10, 10, 16, 30);
-        LocalDateTime startLesson2 = LocalDateTime.of(2022, 10, 18, 14, 30);
-        LocalDateTime endLesson2 = LocalDateTime.of(2022, 10, 18, 16, 30);
-        LocalDateTime startLesson3 = LocalDateTime.of(2022, 11, 20, 10, 30);
-        LocalDateTime endLesson3 = LocalDateTime.of(2022, 11, 20, 12, 30);
-        LocalDateTime startLesson4 = LocalDateTime.of(2022, 9, 20, 13, 30);
-        LocalDateTime endLesson4 = LocalDateTime.of(2022, 9, 20, 15, 30);
-        Subject math = new Subject("MATHEMATICS");
-        Subject bio = new Subject("BIOLOGY");
-        TaskList taskList = new TaskList();
-        List<Task> tasks = Arrays.asList(new Task("first"), new Task("second"), new Task("third"));
-        taskList.setTasks(tasks);
-        return new Lesson[] {
-            new Lesson(startLesson1, endLesson1, math, taskList, new Name("Alex Yeoh")),
-            new Lesson(startLesson2, endLesson2, math, taskList, new Name("David Li")),
-            new Lesson(startLesson3, endLesson3, bio, taskList, new Name("Bernice Yu")),
-            new Lesson(startLesson4, endLesson4, bio, taskList, new Name("Bernice Yu")),
-        };
+        try {
+            return new Lesson[] {
+                    new Lesson("lesson1", "12:30", "14:30", "20", "Mathematics"),
+                    new Lesson("lesson2", "13:30", "15:30", "21", "Physics"),
+                    new Lesson("lesson3", "14:30", "16:30", "22", "Biology"),
+                    new Lesson("lesson4", "15:30", "17:30", "23", "Chemistry"),
+            };
+        } catch (ParseException e) {
+            Logger logger = Logger.getLogger(SampleDataUtil.class.getName());
+            logger.warning("Sample lessons not parsed correctly");
+            return new Lesson[] {};
+        }
     }
     public static ReadOnlySchedule getSampleSchedule() {
         ScheduleList sampleSchedule = new ScheduleList();
@@ -106,6 +101,4 @@ public class SampleDataUtil {
         }
         return sampleSchedule;
     }
-
-
 }

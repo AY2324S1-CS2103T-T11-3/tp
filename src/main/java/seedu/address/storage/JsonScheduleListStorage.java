@@ -47,7 +47,7 @@ public class JsonScheduleListStorage implements ScheduleStorage {
 
         Optional<JsonSerializableSchedule> jsonSchedule = JsonUtil.readJsonFile(
                 filePath, JsonSerializableSchedule.class);
-        if (!jsonSchedule.isPresent()) {
+        if (jsonSchedule.isEmpty()) {
             return Optional.empty();
         }
 

@@ -269,7 +269,7 @@ public class TypeParsingUtil {
      */
     public static Subject parseSubject(String input) throws ParseException {
         if (Subject.isValidSubject(input.toUpperCase())) {
-            return Subject.parseSubject(input);
+            return Subject.of(input);
         } else {
             throw new InvalidInputException(input + " is not a valid subject");
         }
@@ -490,7 +490,7 @@ public class TypeParsingUtil {
     }
 
     @SuppressWarnings("unchecked")
-    public static ListEntry parseToListEntry(Class<? extends ListEntry> listEntryClass, String inputStr) throws ParseException {
+    public static ListEntry parseToListEntry(Class<? extends ListEntry> listEntryClass, String inputStr, boolean isNameOptional) throws ParseException {
         try {
             String fieldName;
             String flagName;
@@ -499,7 +499,10 @@ public class TypeParsingUtil {
                 fieldName = capitaliseFieldName(field);
                 flagName = fieldName.toLowerCase();
                 if (fieldName.equals("Name")) {
-                    call(defaultEntry, "setNameIfNotDefault", parseTo(Name.class, flagName, inputStr));
+                    Object o = parseTo(Name.class, flagName, inputStr, isNameOptional);
+                    if (o != null) {
+                        call(defaultEntry, "setNameIfNotDefault", o);
+                    }
                 } else {
                     String setter = "set" + fieldName + "IfNotDefault";
                     Object o = parseTo((Class<? extends ListEntryField>) field.getType(), flagName,inputStr,true);
@@ -513,6 +516,8 @@ public class TypeParsingUtil {
             throw new ParseException(e.getMessage());
         }
     }
-
+    public static ListEntry parseToListEntry(Class<? extends ListEntry> listEntryClass, String inputStr) throws ParseException {
+        return parseToListEntry(listEntryClass, inputStr, false);
+    }
 
 }

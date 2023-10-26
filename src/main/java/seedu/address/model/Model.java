@@ -180,19 +180,13 @@ public interface Model {
      */
     boolean sameState(State state);
 
-    public Class<? extends ListEntry> getCurrentlyDisplayedClass();
+
     public boolean hasCurrentShownEntry();
+    ObservableList<? extends ListEntry> getCurrentShownList();
+    Class<? extends ListEntry> getCurrentlyDisplayedClass();
+    ListEntry getCurrentShownEntry();
 
     // todo: implement everything below here properly
-    /**
-     * Gets the current shown entry.
-     * @return person or lesson or task currently shown
-     */
-    ListEntry getCurrentShownEntry();
-    ObservableList<? extends ListEntry> getCurrentShownList();
-    default ObservableList<Task> getFilteredTaskList() {
-        return null;
-    }
     default void setTask(Task target, Task editedTask) {
     }
     default void addTask(Task task) {

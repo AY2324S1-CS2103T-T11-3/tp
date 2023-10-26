@@ -85,7 +85,7 @@ class TypeParsingUtilTest {
     void parseSubjectTest() {
         String testString = "addLesson -name yiwen -start 14:30 -end 17:30 -day 2023/12/30 -subject english";
         try {
-            assertEquals(TypeParsingUtil.parseSubject("subject", testString).toString(), "[ENGLISH]");
+            assertEquals(TypeParsingUtil.parseSubject("subject", testString).toString(), "ENGLISH");
             assertThrows(ParseException.class, () -> TypeParsingUtil.parseSubject("subject", "-subject cs2103"));
             TypeParsingUtil.parseSubject("subject", "subject 14:60", true);
         } catch (ParseException e) {

@@ -30,7 +30,6 @@ public class JsonSerializableSchedule {
     @JsonCreator
     public JsonSerializableSchedule(@JsonProperty("lessons") List<JsonAdaptedLesson> lessons) {
         this.lessons.addAll(lessons);
-
     }
 
     /**

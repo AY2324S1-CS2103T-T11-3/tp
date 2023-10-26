@@ -4,19 +4,18 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
+import java.util.function.Function;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
-import seedu.address.model.listEntryFields.Day;
-import seedu.address.model.listEntryFields.Time;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.listEntryFields.*;
 import seedu.address.model.lists.TaskList;
-import seedu.address.model.listEntryFields.Name;
-import seedu.address.model.listEntryFields.Subject;
 
 /**
  * Represents a student's lesson in the schedule.
@@ -49,39 +48,18 @@ public class Lesson extends ListEntry {
      * @param studentNames The student attending this lesson. Note: Converted to ArrayList when stored
      * @see seedu.address.logic.parser.ParserUtil
      */
-    public Lesson(LocalDateTime start, LocalDateTime end, Subject subject, TaskList taskList, Name... studentNames) {
-        requireAllNonNull(start, end, subject);
-        this.name = Name.DEFAULT_NAME;
-        this.start = new Time(start);
-        this.end = new Time(end);
-        this.subject = subject;
-        this.students = new ArrayList<>(Arrays.asList(studentNames));
-        this.taskList = taskList;
+    public Lesson(Name name, Time start, Time end, Day day, Subject subject, Name... studentNames) {
+           requireAllNonNull(name,start, end, day,subject, studentNames);
+           this.name = name;
+           this.start = start;
+           this.end = end;
+           this.subject = subject;
+           this.students = new ArrayList<>(Arrays.asList(studentNames));
+           this.taskList = new TaskList();
+           this.day = day;
     }
-    //todo store the name of lesson as well;
-    /**
-     * Alternative constructor for a Lesson Object without subject
-     */
-    public Lesson(LocalDateTime start, LocalDateTime end, TaskList taskList, Name... studentNames) {
-        requireAllNonNull(start, end);
-        this.name = Name.DEFAULT_NAME;
-        this.start = new Time(start);
-        this.end = new Time(end);
-        this.students = new ArrayList<>(Arrays.asList(studentNames));
-        this.taskList = taskList;
-    }
-    /**
-     * Alternative constructor for a Lesson Object with an ArrayList of students
-     */
-    public Lesson(LocalDateTime start, LocalDateTime end, Subject subject,
-                  TaskList taskList, ArrayList<Name> studentNames) {
-        requireAllNonNull(start, end, subject);
-        this.name = Name.DEFAULT_NAME;
-        this.start = new Time(start);
-        this.end = new Time(end);
-        this.subject = subject;
-        this.students = studentNames;
-        this.taskList = taskList;
+    public Lesson (String name, String start, String end, String day, String subject) throws ParseException {
+        this(new Name(name), new Time(start), new Time(end), Day.of(day), new Subject(subject));
     }
     private Lesson() {
         this.name = Name.DEFAULT_NAME;
@@ -92,6 +70,7 @@ public class Lesson extends ListEntry {
         this.taskList = new TaskList();
         this.day = Day.DEFAULT_DAY;
     }
+
     public static Lesson getDefaultLesson() {
         return DEFAULT_LESSON.clone();
     }
@@ -132,16 +111,14 @@ public class Lesson extends ListEntry {
      * Gets the start time formatted in 12h
      */
     public String getStartTimeStr() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mm a");
-        return start.getTime().format(formatter);
+        return start.toString();
     }
 
     /**
      * Gets the end time formatted in 12h
      */
     public String getEndTimeStr() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mm a");
-        return end.getTime().format(formatter);
+        return end.toString();
     }
 
     public Day getDay() {
@@ -161,24 +138,13 @@ public class Lesson extends ListEntry {
     /**
      * Gets a one-line overview of the lesson.
      *
-     * If a lesson is on Thursday, 10 Oct 10 am - 12 pm, it will be formatted as:
-     *
-     * 10 am - 12 pm // TODO
-     * @return A formatted overview of the time of the lesson
-     */
-    public String getLessonOverview() {
-        return getLessonDateStr() + " • " + getSubjectStr();
-    }
-    /**
-     * Gets a one-line overview of the lesson.
-     *
      * If a lesson is on Tuesday, 10 Oct 10 am - 12 pm, it will be formatted as:
      *
      * 10 am - 12 pm
      * @return A formatted overview of the time of the lesson
      */
     public String getLessonDuration() {
-        return getStartTimeStr() + " - " + getEndTimeStr();
+        return start + " - " + end;
     }
 
     /**
@@ -224,6 +190,9 @@ public class Lesson extends ListEntry {
         return start;
     }
     public void setStart(Time start) {
+        if (end!= Time.DEFAULT_TIME && start.isAfter(end)) {
+            throw new IllegalArgumentException("Start time cannot be after end time");
+        }
         this.start = start;
     }
     public void setStartIfNotDefault(Time start) {
@@ -237,6 +206,9 @@ public class Lesson extends ListEntry {
     }
 
     public void setEnd(Time end) {
+        if (start!= Time.DEFAULT_TIME && end.isBefore(start)) {
+            throw new IllegalArgumentException("End time cannot be before start time");
+        }
         this.end = end;
     }
     public void setEndIfNotDefault(Time end) {
@@ -276,6 +248,16 @@ public class Lesson extends ListEntry {
         }
         this.students.add(student);
     }
+
+    public String serializeName() {
+        return this.name.toString();
+    }
+    public Name deserializeName(String str) {
+        return str.equals(Name.DEFAULT_NAME.toString())
+                ? Name.DEFAULT_NAME
+                : new Name(str);
+    }
+
     /**
      * Serializes the start date to a String
      * @return stringified version of start date
@@ -295,10 +277,9 @@ public class Lesson extends ListEntry {
      * @return stringified version of subject
      */
     public String serializeSubject() {
-        return this.subject != null
-                ? this.subject.subjectName.toString()
-                : Subject.Subjects.NONE.toString(); // TODO public access
+        return this.subject.toString();
     }
+
     /**
      * Serializes the students to a String
      * @return stringified version of students
@@ -314,6 +295,14 @@ public class Lesson extends ListEntry {
     public String serializeTaskList() { //TODO
         return "";
     }
+    public String serializeDay() {
+       return this.day.toString();
+    }
+    public static Day deserializeDay(String str) throws ParseException {
+        return str.equals(Day.DEFAULT_DAY.toString())
+                ? Day.DEFAULT_DAY
+                : Day.of(str);
+    }
 
     /**
      * Deserialize the String to a Task List
@@ -327,17 +316,6 @@ public class Lesson extends ListEntry {
      * Deserialize the dates to a String
      * @return stringified version of dates
      */
-    public static LocalDateTime deserializeDate(String date) throws IllegalValueException {
-        return LocalDateTime.parse(date);
-    }
-
-    /**
-     * Deserialize the subject to a String
-     * @return stringified version of subjects
-     */
-    public static Subject deserializeSubject(String subject) throws IllegalValueException {
-        return Subject.parseSubject(subject);
-    }
 
     /**
      * Deserialize the students to a String
@@ -364,24 +342,13 @@ public class Lesson extends ListEntry {
                 && subject.equals(otherLesson.subject)
                 && students.equals(otherLesson.students)
                 && name.equals(otherLesson.name)
-                && taskList.equals(otherLesson.taskList);
-
+                && taskList.equals(otherLesson.taskList)
+                && day.equals(otherLesson.day);
     }
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(start, end, subject, students);
-    }
-    /**
-     * Returns true if both lessons have the same start and end time.
-     * This defines a weaker notion of equality between two lessons.
-     */
-    public boolean equals(Lesson otherLesson) {
-        return otherLesson.getName().equals(getName())
-                && otherLesson.getStart().equals(getStart())
-                && otherLesson.getEnd().equals(getEnd())
-                && otherLesson.getSubject().equals(getSubject())
-                && otherLesson.getStudents().equals(getStudents());
     }
 
     /**
@@ -393,6 +360,12 @@ public class Lesson extends ListEntry {
         requireAllNonNull(otherLesson);
         if (otherLesson == this) {
             return true;
+        }
+        if (this.day == Day.DEFAULT_DAY || otherLesson.getDay() == Day.DEFAULT_DAY) {
+            return false;
+        }
+        if (!this.day.equals(otherLesson.getDay())) {
+            return false;
         }
         if (this.start == Time.DEFAULT_TIME || otherLesson.getStart() == Time.DEFAULT_TIME) {
             return false;

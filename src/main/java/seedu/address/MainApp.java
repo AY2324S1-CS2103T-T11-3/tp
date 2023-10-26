@@ -100,7 +100,7 @@ public class MainApp extends Application {
         }
         try {
             scheduleListOptional = storage.readScheduleList();
-            if (!scheduleListOptional.isPresent()) {
+            if (scheduleListOptional.isEmpty()) {
                 logger.info("Creating a new data file " + storage.getScheduleListFilePath()
                         + " populated with a sample Schedule.");
             }

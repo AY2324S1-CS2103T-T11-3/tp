@@ -1,8 +1,10 @@
 package seedu.address.logic.commands;
 
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.listEntries.Lesson;
 import seedu.address.model.listEntries.ListEntry;
 import seedu.address.model.Model;
+import seedu.address.model.listEntryFields.Time;
 
 import java.util.List;
 
@@ -58,7 +60,7 @@ public class GeneralEditCommand extends Command {
                     if (index < 1 || index - 1 >= size) {
                         throw new CommandException("Index out of bounds, expected 1 to " + size + " but got " + index + ".");
                     }
-                    original = (ListEntry) call(list, "get", (int)index);
+                    original = (ListEntry) call(list, "get", (int)index - 1);
                 }
             }
 
@@ -66,6 +68,15 @@ public class GeneralEditCommand extends Command {
             cloned = original.clone();
     }
     private void editFields(Model model) throws CommandException {
+        /*
+        if (className.equals("Lesson")) {
+            Lesson lesson = (Lesson) editedFieldsHolder;
+            Lesson originalLesson = (Lesson) original;
+            if (lesson.getStart() != Time.DEFAULT_TIME && lesson.getEnd() != Time.DEFAULT_TIME && lesson.getStart().isAfter(lesson.getEnd())) {
+                throw new CommandException("Start time cannot be after end time.");
+            }
+        }
+        */
         for (String fieldName: getCapitalisedListEntryFields(original)) {
             String setter = "set" + fieldName + "IfNotDefault";
             String getter = "get" + fieldName;
@@ -76,16 +87,16 @@ public class GeneralEditCommand extends Command {
         if (cloned.equals(original)) {
             throw new CommandException("No change detected.");
         }
-
-
-        boolean hasNameCollision = (boolean) call(model, "has" + className +"ClashWith", cloned);
-        if (hasNameCollision) {
-            throw new CommandException("Entry with the same name already exists.");
+        if (!cloned.getName().equals(original.getName())) {
+            boolean hasCollision = (boolean) call(model, "has" + className +"ClashWith", cloned);
+            if (hasCollision) {
+                throw new CommandException("Entry with the same name already exists.");
+            }
         }
     }
     private void writeBack(Model model) throws CommandException {
         call(model, "set" + className, original, cloned);
-        call(model, "updateFiltered" + className + "List");
+        //call(model, "updateFiltered" + className + "List");
     }
     public ListEntry getEdited() {
         return cloned;

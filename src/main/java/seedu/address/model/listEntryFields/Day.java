@@ -8,24 +8,44 @@ import java.time.format.DateTimeFormatter;
 import static seedu.address.logic.parser.TypeParsingUtil.parseDate;
 
 public class Day extends ListEntryField {
+    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     public static final Day DEFAULT_DAY = new Day();
     private LocalDate day;
     public Day(LocalDate day) {
         this.day = day;
     }
-    public Day(String str) throws ParseException {
-        this.day = parseDate(str);
+    public Day(String str) throws IllegalArgumentException {
+        try {
+            this.day = parseDate(str);
+        } catch (ParseException e) {
+            throw new IllegalArgumentException(e);
+        }
     }
     private Day() {
+    }
+
+    public static Day of(String str) throws IllegalArgumentException {
+        return new Day(str);
+    }
+    public static Day deserialize(String str) {
+        return new Day(LocalDate.parse(str, FORMATTER));
+    }
+    public static Boolean isValid(String test) {
+        try {
+            parseDate(test);
+            return true;
+        } catch (ParseException e) {
+            return false;
+        }
     }
 
     public String toString() {
         if (this == DEFAULT_DAY) {
             return "To be added";
         }
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM yyyy");
-        return day.format(formatter);
+        return day.format(FORMATTER);
     }
+
 
     public LocalDate getDay() {
         return day;
@@ -60,6 +80,13 @@ public class Day extends ListEntryField {
             return false;
         }
         return this.day.equals(other.day);
+    }
+
+    public int compareTo(Day other) {
+        if (this == DEFAULT_DAY || other == DEFAULT_DAY) {
+            return other == DEFAULT_DAY ? -1 : 1;
+        }
+        return this.day.compareTo(other.day);
     }
 
     @Override

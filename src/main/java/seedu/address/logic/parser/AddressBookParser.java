@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.TypeParsingUtil.getValueImmediatelyAfterCommandName;
 
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -40,6 +41,11 @@ public class AddressBookParser {
      * @throws ParseException if the user input does not conform the expected format
      */
     public Command parseCommand(String userInput) throws ParseException {
+        Command explicitAddOrEditCommand = parseExplicitAddOrEditCommand(userInput);
+        if (explicitAddOrEditCommand != null) {
+            return explicitAddOrEditCommand;
+        }
+
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
@@ -74,10 +80,11 @@ public class AddressBookParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
-        case AddLessonCommand.COMMAND_WORD:
-            return new AddLessonCommandParser().parse(userInput);
-
         default:
+            Command implicitAddOrEditCommand = parseImplicitAddOrEditCommand(userInput);
+            if (implicitAddOrEditCommand != null) {
+                return implicitAddOrEditCommand;
+            }
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
@@ -94,19 +101,24 @@ public class AddressBookParser {
             @Override
             public CommandResult execute(Model model) throws CommandException {
                 String result = "";
+                String commandName = "";
                 CommandResult temp;
                 try {
                     for (Command command : commands) {
+                        commandName = command.getClass().getSimpleName();
                         temp = command.execute(model);
-                        result += command.getClass().getSimpleName() + ": " + temp.getFeedbackToUser() + "\n";
+                        if (!temp.getFeedbackToUser().isEmpty()) {
+                            result += commandName + ": " + temp.getFeedbackToUser() + "\n";
+                        }
                     }
-
+                } catch (CommandException e) {
+                    throw new CommandException(result + commandName + " failed: " + e.getMessage());
                 }
-                return new CommandResult("Macro command executed");
+                return new CommandResult(result);
             }
-        }
+        };
     }
-     */
+    */
     public Command parseExplicitAddOrEditCommand(String userInputStr) throws ParseException {
         if (userInputStr.startsWith("addStudent")) {
             return new GeneralAddCommandParser(Person.class).parse(userInputStr);
@@ -118,16 +130,28 @@ public class AddressBookParser {
             return new GeneralAddCommandParser(model.getCurrentlyDisplayedClass()).parse(userInputStr);
         }
 
-        if (userInputStr.startsWith("editStudent")) {
-            return new GeneralEditCommandParser(Person.class).parse(userInputStr);
-        } else if (userInputStr.startsWith("editLesson")) {
-            return new GeneralEditCommandParser(Lesson.class).parse(userInputStr);
-        } else if (userInputStr.startsWith("editTask")) {
-            return new GeneralEditCommandParser(Task.class).parse(userInputStr);
-        } else if (userInputStr.startsWith("edit")) {
+        if (userInputStr.startsWith("edit")) {
+            String indexString = getValueImmediatelyAfterCommandName("edit", "index", userInputStr, true);
+            if (!model.hasCurrentShownEntry() && indexString == null) {
+                throw new ParseException("Please show an entry or include an index first before editing it.");
+            }
             return new GeneralEditCommandParser(model.getCurrentlyDisplayedClass()).parse(userInputStr);
         }
+        return null;
     }
+    public Command parseImplicitAddOrEditCommand(String userInputStr) throws ParseException {
 
-
+        if (userInputStr.contains("-") && startWithNumber(userInputStr)) {
+            return new GeneralEditCommandParser(model.getCurrentlyDisplayedClass()).parse("edit " + userInputStr);
+        }
+        if (userInputStr.startsWith("-")&&model.hasCurrentShownEntry()) {
+            return new GeneralEditCommandParser(model.getCurrentlyDisplayedClass()).parse("edit " + userInputStr);
+        }
+        return null;
+    }
+    public boolean startWithNumber(String userInputStr) {
+        Pattern pattern = Pattern.compile("^\\d+");
+        Matcher matcher = pattern.matcher(userInputStr);
+        return matcher.find();
+    }
 }

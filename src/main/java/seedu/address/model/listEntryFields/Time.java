@@ -4,10 +4,12 @@ import seedu.address.logic.parser.exceptions.ParseException;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 import static seedu.address.logic.parser.TypeParsingUtil.parseTime;
 
 public class Time extends ListEntryField {
+    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("h:mm a");
     public static Time DEFAULT_TIME = new Time();
     private LocalTime time;
     public Time(LocalDateTime time) {
@@ -16,14 +18,30 @@ public class Time extends ListEntryField {
     public Time(LocalTime time) {
         this.time = time;
     }
-    public Time(String str) throws ParseException {
-        LocalTime time = parseTime(str);
-        LocalDateTime now = LocalDateTime.now();
-        this.time = time.withHour(now.getHour()).withMinute(now.getMinute());
+    public Time(String str) throws IllegalArgumentException {
+        try {
+            this.time = parseTime(str);
+        } catch (ParseException e) {
+            throw new IllegalArgumentException(e);
+        }
+
     }
     private Time() {
     }
-
+    public static Time of(String str) throws IllegalArgumentException {
+        return new Time(str);
+    }
+    public static Time deserialize(String str) {
+        return new Time(LocalTime.parse(str, FORMATTER));
+    }
+    public static Boolean isValid(String test) {
+        try {
+            parseTime(test);
+            return true;
+        } catch (ParseException e) {
+            return false;
+        }
+    }
     public LocalTime getTime() {
         return time;
     }
@@ -65,4 +83,10 @@ public class Time extends ListEntryField {
         return this.time.compareTo(other.time);
     }
 
+    public String toString() {
+        if (this == DEFAULT_TIME) {
+            return "To be added";
+        }
+        return time.format(FORMATTER);
+    }
 }

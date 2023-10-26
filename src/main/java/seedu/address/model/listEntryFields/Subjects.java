@@ -28,7 +28,7 @@ public class Subjects extends ListEntryField {
     public static Subjects of(String input) throws IllegalArgumentException {
         Subjects t = new Subjects();
         for (String str : input.split(",")) {
-            t.add(Subject.parseSubject(str.trim()));
+            t.add(Subject.of(str.trim()));
         }
         return t;
     }
