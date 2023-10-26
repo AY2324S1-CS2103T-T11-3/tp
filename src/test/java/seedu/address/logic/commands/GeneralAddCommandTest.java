@@ -7,7 +7,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.listEntries.Lesson;
 import seedu.address.model.listEntries.Person;
-import seedu.address.model.listEntryFields.Name;
+import seedu.address.model.l.Name;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static seedu.address.testutil.TypicalLessons.getTypicalScheduleList;

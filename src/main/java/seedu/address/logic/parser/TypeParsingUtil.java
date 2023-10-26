@@ -13,10 +13,10 @@ import java.util.regex.Pattern;
 
 import seedu.address.logic.parser.exceptions.*;
 import seedu.address.model.listEntries.ListEntry;
-import seedu.address.model.listEntryFields.ListEntryField;
-import seedu.address.model.listEntryFields.Name;
-import seedu.address.model.listEntryFields.Subject;
-import seedu.address.model.listEntryFields.Tag;
+import seedu.address.model.l.ListEntryField;
+import seedu.address.model.l.Name;
+import seedu.address.model.l.Subject;
+import seedu.address.model.l.Tag;
 
 import static seedu.address.logic.ReflectionUtil.*;
 import static seedu.address.logic.ReflectionUtil.call;

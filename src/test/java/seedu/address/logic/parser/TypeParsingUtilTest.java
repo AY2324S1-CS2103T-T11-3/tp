@@ -3,11 +3,8 @@ package seedu.address.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
-import static seedu.address.logic.ReflectionUtil.*;
-import static seedu.address.logic.ReflectionUtil.call;
 import static seedu.address.logic.parser.TypeParsingUtil.*;
 
-import java.lang.reflect.Field;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
@@ -15,13 +12,10 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.listEntries.Lesson;
-import seedu.address.model.listEntries.ListEntry;
 import seedu.address.model.listEntries.Person;
-import seedu.address.model.listEntryFields.Address;
-import seedu.address.model.listEntryFields.ListEntryField;
-import seedu.address.model.listEntryFields.Name;
-import seedu.address.model.listEntryFields.Tag;
+import seedu.address.model.l.Address;
+import seedu.address.model.l.Name;
+import seedu.address.model.l.Tag;
 
 class TypeParsingUtilTest {
     @Test

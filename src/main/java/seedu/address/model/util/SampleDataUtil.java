@@ -1,8 +1,6 @@
 package seedu.address.model.util;
 
-import java.time.LocalDateTime;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -13,16 +11,14 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlySchedule;
 import seedu.address.model.ScheduleList;
 import seedu.address.model.listEntries.Lesson;
-import seedu.address.model.listEntries.Task;
-import seedu.address.model.lists.TaskList;
-import seedu.address.model.listEntryFields.Address;
-import seedu.address.model.listEntryFields.Email;
-import seedu.address.model.listEntryFields.Name;
 import seedu.address.model.listEntries.Person;
-import seedu.address.model.listEntryFields.Phone;
-import seedu.address.model.listEntryFields.Remark;
-import seedu.address.model.listEntryFields.Subject;
-import seedu.address.model.listEntryFields.Tag;
+import seedu.address.model.l.Address;
+import seedu.address.model.l.Email;
+import seedu.address.model.l.Name;
+import seedu.address.model.l.Phone;
+import seedu.address.model.l.Remark;
+import seedu.address.model.l.Subject;
+import seedu.address.model.l.Tag;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
@@ -83,10 +79,10 @@ public class SampleDataUtil {
     public static Lesson[] getSampleLessons() {
         try {
             return new Lesson[] {
-                    new Lesson("lesson1", "12:30", "14:30", "20", "Mathematics"),
-                    new Lesson("lesson2", "13:30", "15:30", "21", "Physics"),
-                    new Lesson("lesson3", "14:30", "16:30", "22", "Biology"),
-                    new Lesson("lesson4", "15:30", "17:30", "23", "Chemistry"),
+                new Lesson("lesson1", "12:30", "14:30", "20", "Mathematics"),
+                new Lesson("lesson2", "13:30", "15:30", "21", "Physics"),
+                new Lesson("lesson3", "14:30", "16:30", "22", "Biology"),
+                new Lesson("lesson4", "15:30", "17:30", "23", "Chemistry"),
             };
         } catch (ParseException e) {
             Logger logger = Logger.getLogger(SampleDataUtil.class.getName());

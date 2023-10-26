@@ -1,6 +1,5 @@
 package seedu.address.testutil;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -10,8 +9,6 @@ import seedu.address.model.ScheduleList;
 import seedu.address.model.listEntries.Lesson;
 import seedu.address.model.listEntries.Task;
 import seedu.address.model.lists.TaskList;
-import seedu.address.model.listEntryFields.Name;
-import seedu.address.model.listEntryFields.Subject;
 
 /**
  * A utility class containing a list of {@code Person} objects to be used in tests.

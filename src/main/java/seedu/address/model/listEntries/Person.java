@@ -7,8 +7,8 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.listEntryFields.*;
-import seedu.address.model.listEntryFields.Tag;
+import seedu.address.model.l.*;
+import seedu.address.model.l.Tag;
 
 /**
  * Represents a Person in the address book.

@@ -1,6 +1,6 @@
 package seedu.address.model.listEntries;
 
-import seedu.address.model.listEntryFields.Name;
+import seedu.address.model.l.Name;
 
 public abstract class ListEntry {
     //public static ListEntry getDefault${className);

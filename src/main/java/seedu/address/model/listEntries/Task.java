@@ -3,7 +3,7 @@ package seedu.address.model.listEntries;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.listEntryFields.Name;
+import seedu.address.model.l.Name;
 
 /**
  * Represents a Task in the application.

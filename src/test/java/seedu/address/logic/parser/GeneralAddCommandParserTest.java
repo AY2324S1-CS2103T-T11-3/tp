@@ -1,12 +1,9 @@
 package seedu.address.logic.parser;
 
 import org.junit.jupiter.api.Test;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.listEntries.Lesson;
-import seedu.address.model.listEntries.ListEntry;
 import seedu.address.model.listEntries.Person;
-import seedu.address.model.listEntryFields.*;
+import seedu.address.model.l.*;
 
 import java.util.HashSet;
 

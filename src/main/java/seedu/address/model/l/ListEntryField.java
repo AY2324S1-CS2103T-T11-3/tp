@@ -1,4 +1,4 @@
-package seedu.address.model.listEntryFields;
+package seedu.address.model.l;
 
 public abstract class ListEntryField {
     // static Boolean isValid(String input);

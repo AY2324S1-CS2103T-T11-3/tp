@@ -7,15 +7,13 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.listEntries.Lesson;
 import seedu.address.model.listEntries.Person;
-import seedu.address.model.listEntryFields.*;
-import seedu.address.model.listEntryFields.Tag;
+import seedu.address.model.l.*;
+import seedu.address.model.l.Tag;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.HashSet;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static seedu.address.logic.ReflectionUtil.getCapitalisedListEntryFields;
 import static seedu.address.testutil.TypicalLessons.getTypicalScheduleList;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 

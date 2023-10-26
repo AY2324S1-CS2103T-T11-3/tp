@@ -1,4 +1,4 @@
-package seedu.address.model.listEntryFields;
+package seedu.address.model.l;
 
 import static java.util.Objects.requireNonNull;
 
