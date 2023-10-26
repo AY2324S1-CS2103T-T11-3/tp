@@ -10,7 +10,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
-import seedu.address.model.listEntries.Person;
+import seedu.address.model.listentries.Person;
 
 /**
  * Panel containing a student's details.

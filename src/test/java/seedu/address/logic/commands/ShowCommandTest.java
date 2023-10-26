@@ -17,10 +17,10 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
-import seedu.address.model.listEntries.Lesson;
-import seedu.address.model.listEntries.Person;
 import seedu.address.model.State;
+import seedu.address.model.UserPrefs;
+import seedu.address.model.listentries.Lesson;
+import seedu.address.model.listentries.Person;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for

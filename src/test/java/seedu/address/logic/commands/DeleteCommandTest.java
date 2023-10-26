@@ -19,7 +19,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.listEntries.Person;
+import seedu.address.model.listentries.Person;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for

@@ -1,13 +1,17 @@
 package seedu.address.logic.commands;
 
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.listEntries.ListEntry;
-import seedu.address.model.Model;
+import static seedu.address.logic.ReflectionUtil.call;
+import static seedu.address.logic.ReflectionUtil.getCapitalisedListEntryFields;
 
 import java.util.List;
 
-import static seedu.address.logic.ReflectionUtil.*;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
+import seedu.address.model.listentries.ListEntry;
 
+/**
+ * Edits the details of an existing entry in the address book.
+ */
 
 public class GeneralEditCommand extends Command {
     private final ListEntry editedFieldsHolder;
@@ -17,17 +21,27 @@ public class GeneralEditCommand extends Command {
     private Integer index = null;
 
     private final String className;
-    public GeneralEditCommand (ListEntry editedFieldsHolder) {
+
+    /**
+     * constructor for edit command
+     */
+    public GeneralEditCommand(ListEntry editedFieldsHolder) {
         this.editedFieldsHolder = editedFieldsHolder;
         this.className = editedFieldsHolder.getClass().getSimpleName();
     }
-    public GeneralEditCommand (ListEntry editedFieldsHolder, ListEntry original) {
+    /**
+     * overloading constructor for edit command with original entry
+     */
+    public GeneralEditCommand(ListEntry editedFieldsHolder, ListEntry original) {
         this.editedFieldsHolder = editedFieldsHolder;
         this.className = editedFieldsHolder.getClass().getSimpleName();
         this.original = original;
         this.cloned = original.clone();
     }
-    public GeneralEditCommand (ListEntry editedFieldsHolder, Integer index) {
+    /**
+     * overloading constructor for edit command with index
+     */
+    public GeneralEditCommand(ListEntry editedFieldsHolder, Integer index) {
         this.editedFieldsHolder = editedFieldsHolder;
         this.className = editedFieldsHolder.getClass().getSimpleName();
         this.index = index;
@@ -41,40 +55,32 @@ public class GeneralEditCommand extends Command {
         writeBack(model);
         return new CommandResult("Edited " + className + ": " + cloned.toString());
     }
-    //raw types are used here because type is erased at run time, but we know for sure the list is of type list<listEntry>
     @SuppressWarnings("rawtypes")
     private void init(Model model) throws CommandException {
         if (original == null) {
             if (index == null) {
                 original = model.getCurrentShownEntry();
             } else {
-                Object returned = call(model, "getFiltered"+className+"List");
+                Object returned = call(model, "getFiltered" + className + "List");
                 List list;
                 if (!(returned instanceof List)) {
-                    throw new CommandException("Error calling getFiltered"+className+"List(index) in model.");
+                    throw new CommandException("Error calling getFiltered"
+                            + className + "List(index) in model.");
                 } else {
                     list = (List) returned;
                     Integer size = (Integer) call(returned, "size");
                     if (index < 1 || index - 1 >= size) {
-                        throw new CommandException("Index out of bounds, expected 1 to " + size + " but got " + index + ".");
+                        throw new CommandException("Index out of bounds, expected 1 to "
+                                + size + " but got " + index + ".");
                     }
-                    original = (ListEntry) call(list, "get", (int)index - 1);
+                    original = (ListEntry) call(list, "get", (int) index - 1);
                 }
             }
 
         }
-            cloned = original.clone();
+        cloned = original.clone();
     }
     private void editFields(Model model) throws CommandException {
-        /*
-        if (className.equals("Lesson")) {
-            Lesson lesson = (Lesson) editedFieldsHolder;
-            Lesson originalLesson = (Lesson) original;
-            if (lesson.getStart() != Time.DEFAULT_TIME && lesson.getEnd() != Time.DEFAULT_TIME && lesson.getStart().isAfter(lesson.getEnd())) {
-                throw new CommandException("Start time cannot be after end time.");
-            }
-        }
-        */
         for (String fieldName: getCapitalisedListEntryFields(original)) {
             String setter = "set" + fieldName + "IfNotDefault";
             String getter = "get" + fieldName;
@@ -86,7 +92,7 @@ public class GeneralEditCommand extends Command {
             throw new CommandException("No change detected.");
         }
         if (!cloned.getName().equals(original.getName())) {
-            boolean hasCollision = (boolean) call(model, "has" + className +"ClashWith", cloned);
+            boolean hasCollision = (boolean) call(model, "has" + className + "ClashWith", cloned);
             if (hasCollision) {
                 throw new CommandException("Entry with the same name already exists.");
             }

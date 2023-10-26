@@ -9,10 +9,14 @@ import java.util.Arrays;
 import java.util.function.Predicate;
 
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.listEntries.ListEntry;
-import seedu.address.model.l.ListEntryField;
+import seedu.address.model.fields.ListEntryField;
+import seedu.address.model.listentries.ListEntry;
 
+/**
+ * Utility class for reflection, used to call methods to all fields of a class.
+ */
 public class ReflectionUtil {
+    private static final Predicate<Field> isListEntry = field -> ListEntryField.class.isAssignableFrom(field.getType());
     /**
      * Calls a method on an object with the given arguments.
      * @param obj The object to call the method on.
@@ -38,9 +42,11 @@ public class ReflectionUtil {
         } catch (NoSuchMethodException e) {
             throw new CommandException("No such method " + methodName + " for class " + obj.getClass().getSimpleName());
         } catch (IllegalAccessException e) {
-            throw new CommandException("Access denied for method " + methodName + " for class " + obj.getClass().getSimpleName());
-        } catch (IllegalArgumentException e){
-            throw new CommandException("Illegal argument for method " + methodName + " for class " + obj.getClass().getSimpleName());
+            throw new CommandException("Access denied for method "
+                    + methodName + " for class " + obj.getClass().getSimpleName());
+        } catch (IllegalArgumentException e) {
+            throw new CommandException("Illegal argument for method "
+                    + methodName + " for class " + obj.getClass().getSimpleName());
         } catch (InvocationTargetException e) {
             throw new CommandException("start time cannot be after end time");
         }
@@ -59,11 +65,14 @@ public class ReflectionUtil {
             Method method = clazz.getMethod(methodName);
             return method.invoke(null, args);
         } catch (NoSuchMethodException e) {
-            throw new CommandException("No such method " + methodName + " for class " +clazz.getSimpleName());
+            throw new CommandException("No such method " + methodName
+                    + " for class " + clazz.getSimpleName());
         } catch (IllegalAccessException e) {
-            throw new CommandException("Access denied for method " + methodName + " for class " + clazz.getSimpleName());
-        } catch (IllegalArgumentException e){
-            throw new CommandException("Illegal argument for method " + methodName + " for class " + clazz.getSimpleName());
+            throw new CommandException("Access denied for method "
+                    + methodName + " for class " + clazz.getSimpleName());
+        } catch (IllegalArgumentException e) {
+            throw new CommandException("Illegal argument for method "
+                    + methodName + " for class " + clazz.getSimpleName());
         } catch (InvocationTargetException e) {
             throw new CommandException(e.getMessage());
         }
@@ -87,9 +96,6 @@ public class ReflectionUtil {
 
     /**
      * Gets the value of a field on an object.
-     * @param c The class to get the field from.
-     * @return The private fields of the class.
-     * @param <T> The type of the class.
      */
     public static <T extends ListEntry> Field[] getPrivateFields(Class<T> c) {
         return Arrays.stream(c.getDeclaredFields())
@@ -103,14 +109,13 @@ public class ReflectionUtil {
      * @return The private fields of the object that is a ListEntryField.
      */
     public static String[] getCapitalisedListEntryFields(ListEntry obj) {
-       if (obj == null) {
-           return new String[0];
-       }
-       Field[] fields = getPrivateFields(obj.getClass());
-       return Arrays.stream(getPrivateFields(obj.getClass()))
+        if (obj == null) {
+            return new String[0];
+        }
+        Field[] fields = getPrivateFields(obj.getClass());
+        return Arrays.stream(getPrivateFields(obj.getClass()))
                .filter(isListEntry)
                .map(ReflectionUtil::capitaliseFieldName)
                .toArray(String[]::new);
     }
-    private static final Predicate<Field> isListEntry = field -> ListEntryField.class.isAssignableFrom(field.getType());
 }

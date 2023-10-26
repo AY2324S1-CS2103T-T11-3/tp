@@ -1,8 +1,11 @@
-package seedu.address.model.l;
+package seedu.address.model.fields;
 
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Represents a group of Subjects in the application.
+ */
 public class Subjects extends ListEntryField {
     private Set<Subject> subjects;
     public Subjects() {
@@ -16,6 +19,9 @@ public class Subjects extends ListEntryField {
         return new Subjects(getSubjectSetClone());
     }
 
+    /**
+     * Returns true if a given string is a valid subject.
+     */
     public static Boolean isValid(String input) {
         for (String str : input.split(",")) {
             if (!Subject.isValid(str.trim())) {
@@ -25,6 +31,9 @@ public class Subjects extends ListEntryField {
         return true;
     }
 
+    /**
+     * Constructs a {@code Subjects} from input of format "subject1, subject2, subject3".
+     */
     public static Subjects of(String input) throws IllegalArgumentException {
         Subjects t = new Subjects();
         for (String str : input.split(",")) {
@@ -33,6 +42,9 @@ public class Subjects extends ListEntryField {
         return t;
     }
 
+    /**
+     * Adds a subject to the set of subjects.
+     */
     public void add(Subject subject) throws IllegalArgumentException {
         if (subjects.contains(subject)) {
             throw new IllegalArgumentException("Subject already exists");

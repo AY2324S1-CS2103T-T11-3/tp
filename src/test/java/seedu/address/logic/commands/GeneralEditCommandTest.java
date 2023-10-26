@@ -1,21 +1,32 @@
 package seedu.address.logic.commands;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
-import seedu.address.model.listEntries.Lesson;
-import seedu.address.model.listEntries.Person;
-import seedu.address.model.l.*;
-import seedu.address.model.l.Tag;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalLessons.getTypicalScheduleList;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.address.testutil.TypicalLessons.getTypicalScheduleList;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import org.junit.jupiter.api.Test;
+
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
+import seedu.address.model.fields.Address;
+import seedu.address.model.fields.Email;
+import seedu.address.model.fields.Name;
+import seedu.address.model.fields.Phone;
+import seedu.address.model.fields.Remark;
+import seedu.address.model.fields.Subject;
+import seedu.address.model.fields.Tag;
+import seedu.address.model.fields.Time;
+import seedu.address.model.listentries.Lesson;
+import seedu.address.model.listentries.Person;
 
 class GeneralEditCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalScheduleList());
@@ -34,8 +45,8 @@ class GeneralEditCommandTest {
                                         new Phone("12345678"),
                                         new Email("fakeEmail@fakeDomain.com"),
                                         new Address("fakeAddress"),
-                                        new HashSet<Subject>(){{add(new Subject("English"));}},
-                                        new HashSet<Tag>(){{add(new Tag("fakeTag"));}},
+                                        new HashSet<Subject>(),
+                                        new HashSet<Tag>(),
                                         new Remark("fakeRemark"));
 
             new GeneralEditCommand(person3, length).execute(model);
@@ -50,7 +61,7 @@ class GeneralEditCommandTest {
         }
     }
     @Test
-    void editPerson_NoChange_InvalidIndex_NameCollision() {
+    void editPersonNoChangeInvalidIndexNameCollision() {
         int length = model.getFilteredPersonList().size();
         Person person = new Person(new Name("Yiwen"));
         model.addPerson(person);
@@ -87,7 +98,7 @@ class GeneralEditCommandTest {
         }
     }
     @Test
-    void editLesson_NoChange_InvalidIndex_NameCollision() {
+    void editLessonNoChangeInvalidIndexNameCollision() {
         try {
             int length = model.getFilteredPersonList().size();
             Lesson lesson = Lesson.getDefaultLesson();
@@ -107,5 +118,4 @@ class GeneralEditCommandTest {
             fail();
         }
     }
-
 }

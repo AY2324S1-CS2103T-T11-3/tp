@@ -1,15 +1,19 @@
 package seedu.address.logic.parser;
-
-import org.junit.jupiter.api.Test;
-import seedu.address.model.listEntries.Lesson;
-import seedu.address.model.listEntries.Person;
-import seedu.address.model.l.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.HashSet;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.address.logic.ReflectionUtil.staticCall;
-import static seedu.address.logic.parser.TypeParsingUtil.parseToListEntry;
+import org.junit.jupiter.api.Test;
+
+import seedu.address.model.fields.Address;
+import seedu.address.model.fields.Email;
+import seedu.address.model.fields.Name;
+import seedu.address.model.fields.Phone;
+import seedu.address.model.fields.Remark;
+import seedu.address.model.fields.Tag;
+import seedu.address.model.listentries.Lesson;
+import seedu.address.model.listentries.Person;
 
 class GeneralAddCommandParserTest {
     @Test
@@ -24,8 +28,8 @@ class GeneralAddCommandParserTest {
                                    new Phone("12345678"),
                                    new Email("fakeEmail@fake.domain"),
                                    new Address("Fake Address"),
-                                   new HashSet<>(){{add(new Subject("English"));}},
-                                   new HashSet<Tag>(){{add(new Tag("Tag1")); add(new Tag("Tag2"));}},
+                                   new HashSet<>(),
+                                   new HashSet<Tag>(),
                                    new Remark("Fake Remark"));
             Lesson l1 = Lesson.getDefaultLesson();
             l1.setName(new Name("Lesson1010101"));

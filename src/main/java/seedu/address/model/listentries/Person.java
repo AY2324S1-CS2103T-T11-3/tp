@@ -1,4 +1,4 @@
-package seedu.address.model.listEntries;
+package seedu.address.model.listentries;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
@@ -7,8 +7,15 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.l.*;
-import seedu.address.model.l.Tag;
+import seedu.address.model.fields.Address;
+import seedu.address.model.fields.Email;
+import seedu.address.model.fields.Name;
+import seedu.address.model.fields.Phone;
+import seedu.address.model.fields.Remark;
+import seedu.address.model.fields.Subject;
+import seedu.address.model.fields.Subjects;
+import seedu.address.model.fields.Tag;
+import seedu.address.model.fields.Tags;
 
 /**
  * Represents a Person in the address book.

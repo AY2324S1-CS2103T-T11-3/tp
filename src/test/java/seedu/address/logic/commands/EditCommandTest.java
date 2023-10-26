@@ -15,8 +15,8 @@ import seedu.address.logic.parser.EditCommandParser;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.l.Name;
-import seedu.address.model.listEntries.Person;
+import seedu.address.model.fields.Name;
+import seedu.address.model.listentries.Person;
 
 
 /**

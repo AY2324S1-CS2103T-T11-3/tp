@@ -11,10 +11,10 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.listEntries.Lesson;
-import seedu.address.model.listEntries.ListEntry;
-import seedu.address.model.listEntries.Person;
-import seedu.address.model.listEntries.Task;
+import seedu.address.model.listentries.Lesson;
+import seedu.address.model.listentries.ListEntry;
+import seedu.address.model.listentries.Person;
+import seedu.address.model.listentries.Task;
 import seedu.address.ui.Ui;
 
 /**

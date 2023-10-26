@@ -1,9 +1,6 @@
 package seedu.address.model;
 
 
-import seedu.address.model.listEntries.Lesson;
-import seedu.address.model.listEntries.ListEntry;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 

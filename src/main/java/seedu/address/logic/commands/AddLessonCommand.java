@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.listEntries.Lesson;
+import seedu.address.model.listentries.Lesson;
 
 /**
  * Adds a lesson to the schedule.

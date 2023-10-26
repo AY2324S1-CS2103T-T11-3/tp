@@ -4,7 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
-import seedu.address.model.l.Subject;
+
+import seedu.address.model.fields.Subject;
 
 
 class SubjectTest {

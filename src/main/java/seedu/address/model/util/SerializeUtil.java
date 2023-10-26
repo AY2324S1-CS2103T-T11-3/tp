@@ -1,6 +1,6 @@
 package seedu.address.model.util;
 
-import seedu.address.model.l.ListEntryField;
+import seedu.address.model.fields.ListEntryField;
 /**
  * A utility class for serializing and deserializing ListEntryFields.
  */

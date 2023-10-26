@@ -12,7 +12,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.exceptions.DuplicateLessonException;
 import seedu.address.model.exceptions.DuplicatePersonException;
 import seedu.address.model.exceptions.LessonNotFoundException;
-import seedu.address.model.listEntries.Lesson;
+import seedu.address.model.listentries.Lesson;
 
 
 /**

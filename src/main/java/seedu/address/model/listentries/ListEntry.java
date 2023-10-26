@@ -1,7 +1,10 @@
-package seedu.address.model.listEntries;
+package seedu.address.model.listentries;
 
-import seedu.address.model.l.Name;
+import seedu.address.model.fields.Name;
 
+/**
+ * Represents a ListEntry in the application.
+ */
 public abstract class ListEntry {
     //public static ListEntry getDefault${className);
     public abstract ListEntry clone();

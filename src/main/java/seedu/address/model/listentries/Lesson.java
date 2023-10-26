@@ -1,4 +1,4 @@
-package seedu.address.model.listEntries;
+package seedu.address.model.listentries;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
@@ -10,7 +10,10 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.l.*;
+import seedu.address.model.fields.Day;
+import seedu.address.model.fields.Name;
+import seedu.address.model.fields.Subject;
+import seedu.address.model.fields.Time;
 import seedu.address.model.lists.TaskList;
 
 /**
@@ -45,16 +48,16 @@ public class Lesson extends ListEntry {
      * @see seedu.address.logic.parser.ParserUtil
      */
     public Lesson(Name name, Time start, Time end, Day day, Subject subject, Name... studentNames) {
-           requireAllNonNull(name,start, end, day,subject, studentNames);
-           this.name = name;
-           this.start = start;
-           this.end = end;
-           this.subject = subject;
-           this.students = new ArrayList<>(Arrays.asList(studentNames));
-           this.taskList = new TaskList();
-           this.day = day;
+        requireAllNonNull(name, start, end, day, subject, studentNames);
+        this.name = name;
+        this.start = start;
+        this.end = end;
+        this.subject = subject;
+        this.students = new ArrayList<>(Arrays.asList(studentNames));
+        this.taskList = new TaskList();
+        this.day = day;
     }
-    public Lesson (String name, String start, String end, String day, String subject) throws ParseException {
+    public Lesson(String name, String start, String end, String day, String subject) throws ParseException {
         this(new Name(name), new Time(start), new Time(end), Day.of(day), new Subject(subject));
     }
     private Lesson() {
@@ -170,8 +173,7 @@ public class Lesson extends ListEntry {
      * @return
      */
     public String getSubjectStr() {
-        return serializeSubject();
-        // TODO - change to something more concrete,
+        return subject.toString();
     }
 
     /**
@@ -186,7 +188,7 @@ public class Lesson extends ListEntry {
         return start;
     }
     public void setStart(Time start) {
-        if (end!= Time.DEFAULT_TIME && start.isAfter(end)) {
+        if (end != Time.DEFAULT_TIME && start.isAfter(end)) {
             throw new IllegalArgumentException("Start time cannot be after end time");
         }
         this.start = start;
@@ -202,7 +204,7 @@ public class Lesson extends ListEntry {
     }
 
     public void setEnd(Time end) {
-        if (start!= Time.DEFAULT_TIME && end.isBefore(start)) {
+        if (start != Time.DEFAULT_TIME && end.isBefore(start)) {
             throw new IllegalArgumentException("End time cannot be before start time");
         }
         this.end = end;
@@ -245,82 +247,6 @@ public class Lesson extends ListEntry {
         this.students.add(student);
     }
 
-    public String serializeName() {
-        return this.name.toString();
-    }
-    public Name deserializeName(String str) {
-        return str.equals(Name.DEFAULT_NAME.toString())
-                ? Name.DEFAULT_NAME
-                : new Name(str);
-    }
-
-    /**
-     * Serializes the start date to a String
-     * @return stringified version of start date
-     */
-    public String serializeStart() {
-        return this.start.toString();
-    }
-    /**
-     * Serializes the end date to a String
-     * @return stringified version of end date
-     */
-    public String serializeEnd() {
-        return this.end.toString();
-    }
-    /**
-     * Serializes the subject to a String
-     * @return stringified version of subject
-     */
-    public String serializeSubject() {
-        return this.subject.toString();
-    }
-
-    /**
-     * Serializes the students to a String
-     * @return stringified version of students
-     */
-    public String serializeStudents() {
-        return getStudentsStr();
-    }
-
-    /**
-     * Serializes the Task List to a String
-     * @return stringified version of the task list
-     */
-    public String serializeTaskList() { //TODO
-        return "";
-    }
-    public String serializeDay() {
-       return this.day.toString();
-    }
-    public static Day deserializeDay(String str) throws ParseException {
-        return str.equals(Day.DEFAULT_DAY.toString())
-                ? Day.DEFAULT_DAY
-                : Day.of(str);
-    }
-
-    /**
-     * Deserialize the String to a Task List
-     * @return Task List
-     */
-    public static TaskList deserializeTaskList(String taskList) throws IllegalValueException { //TODO
-        return new TaskList();
-    }
-
-    /**
-     * Deserialize the dates to a String
-     * @return stringified version of dates
-     */
-
-    /**
-     * Deserialize the students to a String
-     * @return stringified version of students
-     */
-    public static ArrayList<String> deserializeStudents(String students) throws IllegalValueException {
-        // comma delimited
-        return new ArrayList<>(Arrays.asList(students.split(",")));
-    }
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -382,6 +308,9 @@ public class Lesson extends ListEntry {
         return "Lesson from " + start + " to " + end + subjectStr + " with " + students;
     }
 
+    /**
+     * Returns a clone of the lesson.
+     */
     public Lesson clone() {
         Lesson cloned = new Lesson();
         cloned.setStartIfNotDefault(this.start);

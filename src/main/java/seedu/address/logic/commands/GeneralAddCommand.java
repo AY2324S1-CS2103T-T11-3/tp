@@ -1,11 +1,14 @@
 package seedu.address.logic.commands;
 
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.listEntries.ListEntry;
-import seedu.address.model.Model;
-
 import static seedu.address.logic.ReflectionUtil.call;
 
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
+import seedu.address.model.listentries.ListEntry;
+
+/**
+ * Adds a list entry to the address book.
+ */
 public class GeneralAddCommand extends Command {
     private final ListEntry toAdd;
     public GeneralAddCommand(ListEntry toAdd) {

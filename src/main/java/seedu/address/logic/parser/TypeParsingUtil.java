@@ -1,5 +1,10 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.ReflectionUtil.call;
+import static seedu.address.logic.ReflectionUtil.capitaliseFieldName;
+import static seedu.address.logic.ReflectionUtil.getPrivateFields;
+import static seedu.address.logic.ReflectionUtil.staticCall;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.time.DayOfWeek;
@@ -11,17 +16,18 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.logic.parser.exceptions.*;
-import seedu.address.model.listEntries.ListEntry;
-import seedu.address.model.l.ListEntryField;
-import seedu.address.model.l.Name;
-import seedu.address.model.l.Subject;
-import seedu.address.model.l.Tag;
+import seedu.address.logic.parser.exceptions.FlagNotFoundException;
+import seedu.address.logic.parser.exceptions.InternalErrorExcpetion;
+import seedu.address.logic.parser.exceptions.InvalidInputException;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.exceptions.RepeatedFlagException;
+import seedu.address.model.fields.ListEntryField;
+import seedu.address.model.fields.Name;
+import seedu.address.model.fields.Subject;
+import seedu.address.model.fields.Tag;
+import seedu.address.model.listentries.ListEntry;
 
-import static seedu.address.logic.ReflectionUtil.*;
-import static seedu.address.logic.ReflectionUtil.call;
 
-// I am considering probably make sense to write specific parser inside each class.
 /**
  * Contains utility methods used for parsing strings into various desirable values, and validating them.
  */
@@ -411,7 +417,9 @@ public class TypeParsingUtil {
             throw new FlagNotFoundException("Flag " + flag + " not found");
         }
     }
-
+    /**
+     * Gets the value immediately after the command name
+     */
     public static String getValueImmediatelyAfterCommandName(String commandWord,
                                                              String errorFieldName,
                                                              String input) throws ParseException {
@@ -423,7 +431,9 @@ public class TypeParsingUtil {
             throw new FlagNotFoundException(errorFieldName + " not found");
         }
     }
-
+    /**
+     * overloading to not throw exception if the flag is not found when isOptional is true
+     */
     public static String getValueImmediatelyAfterCommandName(String commandWord,
                                                              String errorFieldName,
                                                              String input,
@@ -437,19 +447,24 @@ public class TypeParsingUtil {
         }
         return getValueImmediatelyAfterCommandName(commandWord, errorFieldName, input);
     }
-
-    public static <T extends ListEntryField> T parseTo(Class<T> parsedTo, String inputStr) throws ParseException {
+    /**
+     * Parses the input string to a ListEntryField
+     */
+    public static <T extends ListEntryField> T parseTo(Class<T> parsedTo,
+                                                       String inputStr) throws ParseException {
         Method isValid;
         Method of;
         try {
             isValid = parsedTo.getMethod("isValid", String.class);
         } catch (NoSuchMethodException e) {
-            throw new InternalErrorExcpetion("Internal error: " + parsedTo.getSimpleName() + " does not have static isValid method");
+            throw new InternalErrorExcpetion("Internal error: "
+                    + parsedTo.getSimpleName() + " does not have static isValid method");
         }
         try {
             of = parsedTo.getMethod("of", String.class);
         } catch (NoSuchMethodException e) {
-            throw new InternalErrorExcpetion("Internal error: " + parsedTo.getSimpleName() + " does not have static of method");
+            throw new InternalErrorExcpetion("Internal error: "
+                    + parsedTo.getSimpleName() + " does not have static of method");
         }
         boolean isValidResult;
         try {
@@ -467,18 +482,28 @@ public class TypeParsingUtil {
             if (parsedTo.isInstance(o)) {
                 return parsedTo.cast(o);
             } else {
-                throw new InternalErrorExcpetion("Internal error: " + parsedTo.getSimpleName() + " of method does not return a " + parsedTo.getSimpleName());
+                throw new InternalErrorExcpetion("Internal error: "
+                        + parsedTo.getSimpleName() + " of method does not return a " + parsedTo.getSimpleName());
             }
         } else {
-            throw new InvalidInputException("input string: '" + inputStr + "' is not a valid " + parsedTo.getSimpleName());
+            throw new InvalidInputException("input string: '"
+                    + inputStr + "' is not a valid " + parsedTo.getSimpleName());
         }
     }
-
-    public static <T extends ListEntryField> T parseTo(Class<T> parsedTo, String flagName, String inputStr) throws ParseException {
+    /**
+     * overloading parseTo to take in flagName and parse the flag from the input string
+     */
+    public static <T extends ListEntryField> T parseTo(Class<T> parsedTo,
+                                                       String flagName, String inputStr) throws ParseException {
         return parseTo(parsedTo, parseFlag(flagName, inputStr));
     }
-
-    public static <T extends ListEntryField> T parseTo(Class<T> parsedTo, String flagName, String inputStr, boolean isOptional) throws ParseException {
+    /**
+     * overloading to not throw exception if the flag is not found when isOptional is true
+     */
+    public static <T extends ListEntryField> T parseTo(Class<T> parsedTo,
+                                                       String flagName,
+                                                       String inputStr,
+                                                       boolean isOptional) throws ParseException {
         if (isOptional) {
             try {
                 parseFlag(flagName, inputStr);
@@ -489,12 +514,17 @@ public class TypeParsingUtil {
         return parseTo(parsedTo, parseFlag(flagName, inputStr));
     }
 
+    /**
+     * Parses the input string to a ListEntryField
+     */
     @SuppressWarnings("unchecked")
-    public static ListEntry parseToListEntry(Class<? extends ListEntry> listEntryClass, String inputStr, boolean isNameOptional) throws ParseException {
+    public static ListEntry parseToListEntry(Class<? extends ListEntry> listEntryClass,
+                                             String inputStr, boolean isNameOptional) throws ParseException {
         try {
             String fieldName;
             String flagName;
-            ListEntry defaultEntry = (ListEntry) staticCall(listEntryClass, "getDefault" + listEntryClass.getSimpleName());
+            ListEntry defaultEntry = (ListEntry) staticCall(listEntryClass,
+                    "getDefault" + listEntryClass.getSimpleName());
             for (Field field : getPrivateFields(listEntryClass)) {
                 fieldName = capitaliseFieldName(field);
                 flagName = fieldName.toLowerCase();
@@ -505,7 +535,7 @@ public class TypeParsingUtil {
                     }
                 } else {
                     String setter = "set" + fieldName + "IfNotDefault";
-                    Object o = parseTo((Class<? extends ListEntryField>) field.getType(), flagName,inputStr,true);
+                    Object o = parseTo((Class<? extends ListEntryField>) field.getType(), flagName, inputStr, true);
                     if (o != null) {
                         call(defaultEntry, setter, o);
                     }
@@ -516,7 +546,8 @@ public class TypeParsingUtil {
             throw new ParseException(e.getMessage());
         }
     }
-    public static ListEntry parseToListEntry(Class<? extends ListEntry> listEntryClass, String inputStr) throws ParseException {
+    public static ListEntry parseToListEntry(Class<? extends ListEntry> listEntryClass,
+                                             String inputStr) throws ParseException {
         return parseToListEntry(listEntryClass, inputStr, false);
     }
 

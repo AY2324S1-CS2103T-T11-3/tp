@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.ReadOnlySchedule;
 import seedu.address.model.ScheduleList;
-import seedu.address.model.listEntries.Lesson;
+import seedu.address.model.listentries.Lesson;
 import seedu.address.model.lists.Schedule;
 
 

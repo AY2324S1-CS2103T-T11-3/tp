@@ -3,7 +3,9 @@ package seedu.address.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
-import static seedu.address.logic.parser.TypeParsingUtil.*;
+import static seedu.address.logic.parser.TypeParsingUtil.parseFlag;
+import static seedu.address.logic.parser.TypeParsingUtil.parseTo;
+import static seedu.address.logic.parser.TypeParsingUtil.parseToListEntry;
 
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -12,10 +14,10 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.listEntries.Person;
-import seedu.address.model.l.Address;
-import seedu.address.model.l.Name;
-import seedu.address.model.l.Tag;
+import seedu.address.model.fields.Address;
+import seedu.address.model.fields.Name;
+import seedu.address.model.fields.Tag;
+import seedu.address.model.listentries.Person;
 
 class TypeParsingUtilTest {
     @Test
@@ -123,9 +125,9 @@ class TypeParsingUtilTest {
     @Test
     void parseAddressTest() {
         try {
-            Address a = parseTo(Address.class,"address", "-address 123, Clementi Ave 3, #12,34");
+            Address a = parseTo(Address.class, "address", "-address 123, Clementi Ave 3, #12,34");
             assertEquals(a, new Address("123, Clementi Ave 3, #12,34"));
-            assertThrows(ParseException.class, () -> parseTo(Address.class,"address", " address"));
+            assertThrows(ParseException.class, () -> parseTo(Address.class, "address", " address"));
         } catch (ParseException e) {
             fail(e.getMessage());
         }
@@ -134,9 +136,9 @@ class TypeParsingUtilTest {
     @Test
     void parseNameTest() {
         try {
-            assertEquals(parseTo(Name.class,"name", "-name yiwen"),
+            assertEquals(parseTo(Name.class, "name", "-name yiwen"),
                     new Name("yiwen"));
-            assertThrows(ParseException.class, () -> parseTo(Name.class," name"));
+            assertThrows(ParseException.class, () -> parseTo(Name.class, " name"));
         } catch (ParseException e) {
             fail(e.getMessage());
         }

@@ -6,8 +6,8 @@ import java.util.List;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ScheduleList;
-import seedu.address.model.listEntries.Lesson;
-import seedu.address.model.listEntries.Task;
+import seedu.address.model.listentries.Lesson;
+import seedu.address.model.listentries.Task;
 import seedu.address.model.lists.TaskList;
 
 /**
@@ -36,8 +36,8 @@ public class TypicalLessons {
         try {
             taskList.setTasks(fillerTasks);
             return new ArrayList<>(Arrays.asList(
-                    new Lesson("lesson 1",  "14:30", "16:30", "2022/10/10", "MATHEMATICS"),
-                    new Lesson("lesson 2",  "14:30", "16:30", "2022/10/20", "BIOLOGY"),
+                    new Lesson("lesson 1", "14:30", "16:30", "2022/10/10", "MATHEMATICS"),
+                    new Lesson("lesson 2", "14:30", "16:30", "2022/10/20", "BIOLOGY"),
                     new Lesson("lesson 3", "10:30", "12:30", "2022/11/20", "MATHEMATICS")
             ));
         } catch (ParseException e) {

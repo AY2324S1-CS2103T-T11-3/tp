@@ -1,9 +1,9 @@
-package seedu.address.model.listEntries;
+package seedu.address.model.listentries;
 
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.l.Name;
+import seedu.address.model.fields.Name;
 
 /**
  * Represents a Task in the application.
@@ -91,7 +91,7 @@ public class Task extends ListEntry {
         }
 
         Task otherTask = (Task) other;
-           return otherTask.getDescription().equals(getDescription())
+        return otherTask.getDescription().equals(getDescription())
                     && otherTask.isDone == isDone;
 
     }

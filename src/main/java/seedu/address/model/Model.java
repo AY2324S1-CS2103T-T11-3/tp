@@ -5,10 +5,10 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.listEntries.Lesson;
-import seedu.address.model.listEntries.ListEntry;
-import seedu.address.model.listEntries.Task;
-import seedu.address.model.listEntries.Person;
+import seedu.address.model.listentries.Lesson;
+import seedu.address.model.listentries.ListEntry;
+import seedu.address.model.listentries.Person;
+import seedu.address.model.listentries.Task;
 import seedu.address.ui.Ui;
 
 /**

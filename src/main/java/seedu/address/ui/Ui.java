@@ -1,8 +1,8 @@
 package seedu.address.ui;
 
 import javafx.stage.Stage;
-import seedu.address.model.listEntries.Lesson;
-import seedu.address.model.listEntries.Person;
+import seedu.address.model.listentries.Lesson;
+import seedu.address.model.listentries.Person;
 
 /**
  * API of UI component

@@ -10,7 +10,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.exceptions.DuplicatePersonException;
 import seedu.address.model.exceptions.PersonNotFoundException;
-import seedu.address.model.listEntries.Person;
+import seedu.address.model.listentries.Person;
 
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.

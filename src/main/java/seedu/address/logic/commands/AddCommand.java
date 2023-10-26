@@ -13,8 +13,8 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.listEntries.Lesson;
-import seedu.address.model.listEntries.Person;
+import seedu.address.model.listentries.Lesson;
+import seedu.address.model.listentries.Person;
 
 /**
  * Adds a person to the address book.

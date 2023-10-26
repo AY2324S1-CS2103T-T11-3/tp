@@ -9,13 +9,19 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.commands.*;
-import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ShowCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
-import seedu.address.model.listEntries.Lesson;
-import seedu.address.model.listEntries.Person;
-import seedu.address.model.listEntries.Task;
+import seedu.address.model.listentries.Lesson;
+import seedu.address.model.listentries.Person;
+import seedu.address.model.listentries.Task;
 
 /**
  * Parses user input.
@@ -89,7 +95,7 @@ public class AddressBookParser {
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
-    public boolean startsWithNumber(String userInputStr) {
+    private boolean startsWithNumber(String userInputStr) {
         Pattern pattern = Pattern.compile("^\\d+");
         Matcher matcher = pattern.matcher(userInputStr);
         return matcher.find();
@@ -119,7 +125,7 @@ public class AddressBookParser {
         };
     }
     */
-    public Command parseExplicitAddOrEditCommand(String userInputStr) throws ParseException {
+    private Command parseExplicitAddOrEditCommand(String userInputStr) throws ParseException {
         if (userInputStr.startsWith("addStudent")) {
             return new GeneralAddCommandParser(Person.class).parse(userInputStr);
         } else if (userInputStr.startsWith("addLesson")) {
@@ -139,17 +145,18 @@ public class AddressBookParser {
         }
         return null;
     }
-    public Command parseImplicitAddOrEditCommand(String userInputStr) throws ParseException {
+    private Command parseImplicitAddOrEditCommand(String userInputStr) throws ParseException {
 
         if (userInputStr.contains("-") && startWithNumber(userInputStr)) {
             return new GeneralEditCommandParser(model.getCurrentlyDisplayedClass()).parse("edit " + userInputStr);
         }
-        if (userInputStr.startsWith("-")&&model.hasCurrentShownEntry()) {
+        if (userInputStr.startsWith("-") && model.hasCurrentShownEntry()) {
             return new GeneralEditCommandParser(model.getCurrentlyDisplayedClass()).parse("edit " + userInputStr);
         }
         return null;
     }
-    public boolean startWithNumber(String userInputStr) {
+
+    private boolean startWithNumber(String userInputStr) {
         Pattern pattern = Pattern.compile("^\\d+");
         Matcher matcher = pattern.matcher(userInputStr);
         return matcher.find();

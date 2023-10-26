@@ -2,7 +2,7 @@ package seedu.address.ui;
 
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
-import seedu.address.model.listEntries.Lesson;
+import seedu.address.model.listentries.Lesson;
 
 
 /**

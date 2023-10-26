@@ -7,11 +7,11 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.listEntries.Lesson;
-import seedu.address.model.l.Day;
-import seedu.address.model.l.Name;
-import seedu.address.model.l.Subject;
-import seedu.address.model.l.Time;
+import seedu.address.model.fields.Day;
+import seedu.address.model.fields.Name;
+import seedu.address.model.fields.Subject;
+import seedu.address.model.fields.Time;
+import seedu.address.model.listentries.Lesson;
 
 
 

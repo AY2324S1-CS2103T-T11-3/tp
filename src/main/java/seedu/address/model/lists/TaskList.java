@@ -10,7 +10,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.exceptions.DuplicateTaskException;
 import seedu.address.model.exceptions.TaskNotFoundException;
-import seedu.address.model.listEntries.Task;
+import seedu.address.model.listentries.Task;
 
 
 /**

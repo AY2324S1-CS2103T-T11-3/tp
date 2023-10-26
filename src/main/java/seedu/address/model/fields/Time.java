@@ -1,4 +1,4 @@
-package seedu.address.model.l;
+package seedu.address.model.fields;
 
 import static seedu.address.logic.parser.TypeParsingUtil.parseTime;
 

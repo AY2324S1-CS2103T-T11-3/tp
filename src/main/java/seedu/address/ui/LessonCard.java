@@ -5,7 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import seedu.address.model.listEntries.Lesson;
+import seedu.address.model.listentries.Lesson;
 
 /**
  * A UI component that displays information of a {@code Lesson}.

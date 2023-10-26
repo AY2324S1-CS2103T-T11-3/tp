@@ -1,6 +1,5 @@
 package seedu.address.model.person;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
@@ -14,7 +13,7 @@ import static seedu.address.testutil.TypicalPersons.BOB;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.listEntries.Person;
+import seedu.address.model.listentries.Person;
 import seedu.address.testutil.PersonBuilder;
 
 public class PersonTest {
