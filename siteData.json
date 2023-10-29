@@ -118,6 +118,7 @@
       "title": "User Guide",
       "headings": {
         "tutormate-user-guide": "TutorMate User Guide",
+        "about": "About",
         "quick-start": "Quick start",
         "features": "Features",
         "viewing-help-help": "Viewing help : help",
@@ -153,18 +154,18 @@
       "headingKeywords": {}
     },
     {
-      "src": "team/johndoe.md",
-      "title": "John Doe's Project Portfolio Page",
+      "src": "team/hollag.md",
+      "title": "Marcus' Project Portfolio Page",
       "headings": {
-        "project-addressbook-level-3": "Project: AddressBook Level 3"
+        "project-tutormate": "Project: TutorMate"
       },
       "headingKeywords": {}
     },
     {
-      "src": "team/marcus.md",
-      "title": "Marcus' Project Portfolio Page",
+      "src": "team/johndoe.md",
+      "title": "John Doe's Project Portfolio Page",
       "headings": {
-        "project-tutormate": "Project: TutorMate"
+        "project-addressbook-level-3": "Project: AddressBook Level 3"
       },
       "headingKeywords": {}
     },
