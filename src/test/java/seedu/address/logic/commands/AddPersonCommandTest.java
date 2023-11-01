@@ -234,7 +234,7 @@ public class AddPersonCommandTest {
 
         @Override
         public void setState(State state) {
-            //throw new AssertionError("This method should not be called.");
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override

@@ -19,13 +19,13 @@ public class ListCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Showing list";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Displays the specified list, which can be a "
-            + "STUDENTS list, SCHEDULE list or TASKS list. Default command without "
+            + "STUDENTS list or SCHEDULE list. Default command without "
             + "specified list displays the schedule list. When specifying STUDENTS list,"
             + "optional parameters can be used to specify what student details to display\n"
             + "Parameters: [LIST] [KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " SCHEDULE\n"
-            + "Example: " + COMMAND_WORD + " STUDENTS phone email\n"
-            + "Example: " + COMMAND_WORD + " TASKS";
+            + "Example: " + COMMAND_WORD + " STUDENTS phone email\n";
+
     private final State state;
     private final String[] displayParams;
 

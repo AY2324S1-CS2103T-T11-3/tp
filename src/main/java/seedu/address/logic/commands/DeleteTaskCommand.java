@@ -49,7 +49,6 @@ public class DeleteTaskCommand extends Command {
         } catch (IndexOutOfBoundsException e) {
             throw new CommandException("Task index do not belong to any tasks!");
         }
-        model.showLesson(model.getLessonClashWith(currentlyShownLesson));
         return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete));
     }
 
