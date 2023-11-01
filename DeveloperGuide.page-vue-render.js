@@ -401,6 +401,6 @@ with(this){return _c('h3',{attrs:{"id":"saving-data"}},[_v("Saving data"),_c('a'
 with(this){return _c('ol',[_c('li',[_c('p',[_v("Dealing with missing/corrupted data files")]),_v(" "),_c('ol',[_c('li',[_v("If a missing file is detected, the system will automatically create a .json file.")]),_v(" "),_c('li',[_v("If a corrupted file is detected (i.e. missing any key properties), the system will delete the corrupted file, and replace it with a new one.")]),_v(" "),_c('li',[_v("The .json file will be populated with sample content loaded from "),_c('code',{pre:true,attrs:{"class":"hljs inline no-lang"}},[_v("SampleDataUtil.java")]),_v(".")])])]),_v(" "),_c('li',[_c('p',[_v("Saving")]),_v(" "),_c('ol',[_c('li',[_v("Data is written to the file after every command.")])])]),_v(" "),_c('li',[_c('p',[_v("Test cases")])])])}
 },function anonymous(
 ) {
-with(this){return _c('footer',[_c('div',{staticClass:"text-center"},[_c('small',[_v("["),_c('span',[_c('strong',[_v("Powered by")])]),_v(" "),_c('img',{attrs:{"src":"https://markbind.org/favicon.ico","width":"30"}}),_v(" "),_c('a',{attrs:{"href":"https://markbind.org/"}},[_v("MarkBind 5.1.0")]),_v(", generated on Wed, 1 Nov 2023, 13:58:24 GMT+8]")])])])}
+with(this){return _c('footer',[_c('div',{staticClass:"text-center"},[_c('small',[_v("["),_c('span',[_c('strong',[_v("Powered by")])]),_v(" "),_c('img',{attrs:{"src":"https://markbind.org/favicon.ico","width":"30"}}),_v(" "),_c('a',{attrs:{"href":"https://markbind.org/"}},[_v("MarkBind 5.1.0")]),_v(", generated on Wed, 1 Nov 2023, 14:10:00 GMT+8]")])])])}
 }];
   
