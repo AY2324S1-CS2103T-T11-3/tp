@@ -122,7 +122,7 @@
         "quick-start": "Quick start",
         "features": "Features",
         "viewing-help-help": "Viewing help : help",
-        "adding-a-student-add": "Adding a student: add",
+        "adding-a-student-addperson": "Adding a student: addPerson",
         "listing-all-students-list": "Listing all students : list",
         "editing-a-student-edit": "Editing a student : edit",
         "locating-students-by-name-find": "Locating students by name: find",
