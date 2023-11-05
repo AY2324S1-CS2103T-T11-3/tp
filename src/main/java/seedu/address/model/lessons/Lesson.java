@@ -279,6 +279,9 @@ public class Lesson extends ListEntry<Lesson> {
      * #1 same day
      * #2 LessonA start time before or at LessonB end time
      * #3 LessonA end time after or at LessonB start time
+     *
+     * Examples
+     * 14:00 - 16:00 does not clash with 16:00 - 18:00
      * @param otherLesson The other lesson to compare with
      * @return true if the lessons clash
      */
