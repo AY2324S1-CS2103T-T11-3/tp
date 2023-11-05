@@ -274,15 +274,17 @@ public class Lesson extends ListEntry<Lesson> {
 
     /**
      * Returns true if both lessons have the same identity and data fields.
+     *
+     * Conditions for lessons to clash:
+     * #1 same day
+     * #2 LessonA start time before or at LessonB end time
+     * #3 LessonA end time after or at LessonB start time
      * @param otherLesson The other lesson to compare with
      * @return true if the lessons clash
      */
     public boolean isClashWith(Lesson otherLesson) {
         requireAllNonNull(otherLesson);
         if (otherLesson == this) {
-            return true;
-        }
-        if (this.name.equals(otherLesson.getName())) {
             return true;
         }
         if (this.day == Day.DEFAULT_DAY || otherLesson.getDay() == Day.DEFAULT_DAY) {
