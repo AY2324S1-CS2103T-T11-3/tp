@@ -9,14 +9,16 @@ TutorMate helps private tuition teachers manage their students more easily. It a
 
 Given below are my contributions to the project.
 
-* **Code contributed**: [RepoSense link]()
-    * Add test to most of the add, edit, delete commands and parsers.
-    * Implement the add, edit and delete person/lesson , link, nav and filter command and parser.
-    * Implement the storage of the link between person to lesson.
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=yiwen101&breakdown=true)
+   
 * **Enhancements implemented**:
-    * Add usage and improve error messages for the add, edit and delete person/lesson command, link, nav and filter command.
-    * Improve code quality by refactoring the edit command related code with abstraction edit command
-    * Improve code quality by abstracting Time and Day into class
+   * Implemented the add/edit/delete person/lesson, link, nav and filter commands and parsers.
+   * Wrote test for add person, delete person/lesson/task, edit person/lesson/task, link, nav and filter command.
+   * Wrote test for add person/lesson/task, delete person/lesson/task, edit person/lesson, link, nav and filter parser.
+   * Abstracted Time and Day into class, and helped with the sorting, clash detection of both lesson and student class.
+   * Wrote BidirectionalMap class and handle its storage to store linked students and lessons.
+   * Wrote and tested regularExpressionUtil and typeParsingUtil. Improved the quality of serialization of lesson via util class.
+   * Support the render of subjects in colored boxes in the UI.
 
 * **Contributions to User Guide**:
     * to be added soon
@@ -27,9 +29,10 @@ Given below are my contributions to the project.
 * **Contributions to team-based tasks**:
     * Actively help with the maintaining of the issue tracker and codebase
     * Helped with the release of v1.3 java jar.
+    * Generated multiple drafts for the tutorMate logo.
+
 * **Review/mentoring contributions**:
     * Actively help with the review of the PR.
 
 * **Contributions beyond the project team**:
     * to be added soon
-
