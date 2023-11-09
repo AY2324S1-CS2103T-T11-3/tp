@@ -105,6 +105,28 @@
       "headingKeywords": {}
     },
     {
+      "src": "TempUG.md",
+      "title": "User Guide",
+      "headings": {
+        "tutormate-user-guide": "TutorMate User Guide",
+        "about": "About",
+        "quick-start": "Quick start",
+        "important-notes": "Important notes",
+        "basic-usage": "Basic usage",
+        "terminologies-symbols": "Terminologies / Symbols",
+        "notes-on-command-format": "Notes on command format",
+        "table-of-flags": "Table of flags",
+        "features": "Features",
+        "template-feature-without-state-temp": "Template feature without state: temp",
+        "template-feature-with-states": "Template feature with states",
+        "faq": "FAQ",
+        "known-issues": "Known issues",
+        "command-summary": "Command summary",
+        "glossary": "Glossary"
+      },
+      "headingKeywords": {}
+    },
+    {
       "src": "Testing.md",
       "title": "Testing guide",
       "headings": {
