@@ -224,4 +224,8 @@ public interface Model {
     String getLinkedLessonNameStr(Person person);
     Name[] getLinkedWith(Person person);
     Name[] getLinkedWith(Lesson lesson);
+
+    public void addCommandHistory(String commandText);
+    public String getNextCommandHistory();
+    public String getPrevCommandHistory();
 }

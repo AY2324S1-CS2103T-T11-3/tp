@@ -155,16 +155,12 @@ public class MainWindow extends UiPart<Stage> {
          */
         getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
             if (event.getCode() == KeyCode.UP) {
-                if (prevCommandId - 1 >= 0 && prevCommandId - 1 < prevCommand.size()) {
-                    prevCommandId--;
-                    commandBox.changeText(prevCommand.get(prevCommandId));
-                }
+                String prevCommandText = model.getPrevCommandHistory();
+                commandBox.changeText(prevCommandText);
             }
             if (event.getCode() == KeyCode.DOWN) {
-                if (prevCommandId + 1 >= 0 && prevCommandId + 1 < prevCommand.size()) {
-                    prevCommandId++;
-                    commandBox.changeText(prevCommand.get(prevCommandId));
-                }
+                String nextCommandText = model.getNextCommandHistory();
+                commandBox.changeText(nextCommandText);
             }
             if (event.getTarget() instanceof TextInputControl && keyCombination.match(event)) {
                 menuItem.getOnAction().handle(new ActionEvent());
@@ -261,8 +257,6 @@ public class MainWindow extends UiPart<Stage> {
      */
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
-            prevCommand.add(commandText);
-            prevCommandId = prevCommand.size();
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());

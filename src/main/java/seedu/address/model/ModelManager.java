@@ -40,6 +40,7 @@ public class ModelManager implements Model {
     private Lesson currentShowingLesson = null;
     private Task currentShowingTask = null;
     private BiDirectionalMap<Person, Lesson> personToLessonMap;
+    private CommandHistory commandHistory;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -58,6 +59,7 @@ public class ModelManager implements Model {
         this.fullTaskList = new FullTaskList();
         this.fullTaskList.setFullTaskList(scheduleList);
         personToLessonMap = new BiDirectionalMap<>();
+        commandHistory = new CommandHistory();
     }
 
     /**
@@ -424,6 +426,20 @@ public class ModelManager implements Model {
     public String getLinkedLessonNameStr(Person person) {
         return Arrays.stream(personToLessonMap.get(person)).map(Name::toString)
                 .reduce((a, b) -> a + ", " + b).orElse("Not linked to any Lessons yet");
+    }
+
+    //=========== Command history ========================================================
+
+    public void addCommandHistory(String commandText) {
+        commandHistory.add(commandText);
+    }
+
+    public String getNextCommandHistory() {
+        return commandHistory.next();
+    }
+
+    public String getPrevCommandHistory() {
+        return commandHistory.prev();
     }
 
 }

@@ -582,8 +582,19 @@ Example:
 2. Pressing up arrow will go further back in the command history and retrieve: `list schedule`. 
 3. Pressing down arrow will go forward in the command history and retrieve: `list tasks`.
 
+Command history is only valid per session, it does not save into storage.
+Invalid commands are also saved into command history.
+Retrieved commands will replace the existing text in command box.
 
-Pressing up or down beyond the command history will not change the command text box.
+To start navigating the command history, press the up or down arrow, which will point and return the most recent command text (for invalid commands, it will retrieve it again since it is also saved, hence it will not change the command text yet).
+Press up or down to navigate through the history, going beyond the command history will retrieve the oldest or newest command text respectively. 
+During each successful command execution, the pointer resets again, hence pressing the up or down arrow will point and return the most recent command text.
+
+Example:
+Previously typed commands are `list tasks`, `list students`, `list schedule` in this order.
+
+The index in command history remains when user clears the command box while scrolling through the history.
+(e.g. for the history [`list tasks`, `list students`, `list schedule`], if user is retrieves the command history with `list students` and clears his command box, pressing up again will retrieve `list tasks`.)
 
 ### Exiting the program : `exit`
 

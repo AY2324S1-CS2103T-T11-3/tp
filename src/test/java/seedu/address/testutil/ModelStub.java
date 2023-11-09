@@ -430,4 +430,19 @@ public class ModelStub implements Model {
     @Override
     public void resetAllShowFields() {
     }
+
+    @Override
+    public void addCommandHistory(String commandText) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public String getNextCommandHistory() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public String getPrevCommandHistory() {
+        throw new AssertionError("This method should not be called.");
+    }
 }
