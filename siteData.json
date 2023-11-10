@@ -115,10 +115,21 @@
         "basic-usage": "Basic usage",
         "terminologies-symbols": "Terminologies / Symbols",
         "notes-on-command-format": "Notes on command format",
-        "table-of-flags": "Table of flags",
+        "parameter-summary": "Parameter summary",
         "features": "Features",
-        "template-feature-without-state-temp": "Template feature without state: temp",
-        "template-feature-with-states": "Template feature with states",
+        "listing-upcoming-lessons-tasks-students-list": "Listing upcoming lessons / tasks / students : list",
+        "showing-a-lesson-task-student-s-details-show": "Showing a lesson / task / student's details : show",
+        "adding-of-entries-students-lessons-tasks": "Adding of entries (Students, Lessons, Tasks)",
+        "deleting-of-entries-students-lessons-tasks": "Deleting of entries (Students, Lessons, Tasks)",
+        "editing-of-entries-students-lessons": "Editing of entries (Students, Lessons)",
+        "finding-students-lessons-by-name-find": "Finding students/lessons by name : find",
+        "filtering-the-student-schedule-list-filter": "Filtering the student / schedule list : filter",
+        "linking-students-to-lessons-and-vice-versa-linkto": "Linking students to lessons (and vice versa) : linkTo",
+        "viewing-the-linked-students-of-a-lesson-or-the-linked-lessons-of-a-student-nav": "Viewing the linked students of a lesson, or the linked lessons of a student : nav",
+        "command-history": "Command history",
+        "clearing-data-clear": "Clearing data : clear",
+        "exiting-the-program-exit": "Exiting the program : exit",
+        "viewing-help-help": "Viewing help : help",
         "faq": "FAQ",
         "known-issues": "Known issues",
         "command-summary": "Command summary",
@@ -167,6 +178,21 @@
         "faq": "FAQ",
         "known-issues": "Known issues",
         "command-summary": "Command summary"
+      },
+      "headingKeywords": {}
+    },
+    {
+      "src": "features/TEMPLATE_NO_STATE.md",
+      "headings": {
+        "template-feature-without-state-temp": "Template feature without state: temp"
+      },
+      "headingKeywords": {}
+    },
+    {
+      "src": "features/TEMPLATE_STATE.md",
+      "title": "User Guide",
+      "headings": {
+        "template-feature-with-states": "Template feature with states"
       },
       "headingKeywords": {}
     },
