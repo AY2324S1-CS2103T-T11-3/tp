@@ -110,7 +110,7 @@ This box denotes command outputs.
 <box type="warning" seamless>
 
 * Please avoid using " -" in the value of a parameter as tutorMate treats " -" as a reserved word that signifies the start of a new flag.
-* Please do not abuse the parser of tutorMate. For example, do not game it with special characters or __code injections_<sup>[6](#glossary)</sup>_<sup>[4](#glossary)</sup>. TutorMate does not guarantee the behaviour of the application on deliberate and malicious abuse beyond supported normal usage.
+* Please do not abuse the parser of tutorMate. For example, do not game it with special characters or __code injections_<sup>[6](#glossary)</sup>. TutorMate does not guarantee the behaviour of the application on deliberate and malicious abuse beyond supported normal usage.
 * TutorMate supports a maximum of 99999 students, 99999 lessons and 99999 tasks. Further data beyond this limit might be lost and not accessible in the application.
 * Please avoid manually modifying the data files in the _home folder_<sup>[5](#glossary)</sup>. Doing so may result in unexpected behaviour and data loss.
 * Please avoid running multiple instances of TutorMate at the same time. Doing so may result in unexpected behaviour and data loss.
