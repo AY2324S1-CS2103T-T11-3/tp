@@ -52,7 +52,6 @@
         "storage-component": "Storage component",
         "entry-point-classes": "Entry point classes",
         "common-classes": "Common classes",
-        "commons-represents-a-collection-of-classes-used-by-multiple-other-components-they-are-in-the-seedu-addressbook-commons-package": "Commons represents a collection of classes used by multiple other components. They are in the seedu.addressbook.commons package.",
         "implementation": "Implementation",
         "list-feature": "List feature",
         "purpose": "Purpose",
