@@ -83,6 +83,11 @@
         "edit-feature": "Edit Feature",
         "find-feature": "Find Feature",
         "filter-feature": "Filter Feature",
+        "link-feature": "Link Feature",
+        "navigate-feature": "Navigate Feature",
+        "command-history-feature": "Command History Feature",
+        "clear": "Clear",
+        "exit": "Exit",
         "saving-data": "Saving data"
       },
       "headingKeywords": {}
