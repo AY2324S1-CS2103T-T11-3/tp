@@ -653,7 +653,7 @@ with(this){return _c('p',[_c('a',{attrs:{"href":"/tp/images/linkTo/linkTo_lesson
 with(this){return _c('ul',[_c('li',[_v("Current state: In the "),_c('em',[_c('strong',[_v("STUDENTS list")])]),_v(" and no student is selected")]),_v(" "),_c('li',[_v("Input: "),_c('code',{pre:true,attrs:{"class":"hljs inline no-lang"}},[_v("linkTo CS2103T Lab")]),_v(" "),_c('ul',[_c('li',[_v("Error: A student is not yet selected. Select a student using "),_c('code',{pre:true,attrs:{"class":"hljs inline no-lang"}},[_v("show INDEX")]),_v(" first.")])])])])}
 },function anonymous(
 ) {
-with(this){return _c('pre',[_c('code',{pre:true,attrs:{"class":"hljs"}},[_c('span',[_v("No student is shown\n")]),_c('span',[_v("LinkTo command usage: linkTo [LESSON_NAME]\n")]),_c('span',[_v("Example: linkTo CS2103T lab1\n")]),_c('span',[_v("Note: This command is only available when a student is shown\n")])])])}
+with(this){return _c('pre',[_c('code',{pre:true,attrs:{"class":"hljs"}},[_c('span',[_v("No student is shown\n")]),_c('span',[_v("LinkTo command usage: linkTo LESSON_NAME\n")]),_c('span',[_v("Example: linkTo CS2103T lab1\n")]),_c('span',[_v("Note: This command is only available when a student is shown\n")])])])}
 },function anonymous(
 ) {
 with(this){return _c('ul',[_c('li',[_v("Current state: In the "),_c('em',[_c('strong',[_v("STUDENTS list")])]),_v(" and a student is selected")]),_v(" "),_c('li',[_v("Input: "),_c('code',{pre:true,attrs:{"class":"hljs inline no-lang"}},[_v("linkTo CS2109 Lab")]),_v(" "),_c('ul',[_c('li',[_v("Error: No such lesson with the name \"CS2109 Lab\". Make sure the lesson's name is correct and try again.")])])])])}
@@ -683,7 +683,7 @@ with(this){return _c('p',[_c('a',{attrs:{"href":"/tp/images/linkTo/linkTo_lesson
 with(this){return _c('ul',[_c('li',[_v("Current state: In the "),_c('em',[_c('strong',[_v("SCHEDULE list")])]),_v(" and no lesson is selected")]),_v(" "),_c('li',[_v("Input: "),_c('code',{pre:true,attrs:{"class":"hljs inline no-lang"}},[_v("linkTo Bernice Yu")]),_v(" "),_c('ul',[_c('li',[_v("Error: A lesson is not yet selected. Select a lesson using "),_c('code',{pre:true,attrs:{"class":"hljs inline no-lang"}},[_v("show INDEX")]),_v(" first.")])])])])}
 },function anonymous(
 ) {
-with(this){return _c('pre',[_c('code',{pre:true,attrs:{"class":"hljs"}},[_c('span',[_v("No lesson is shown\n")]),_c('span',[_v("LinkTo command usage: linkTo [STUDENT_NAME]\n")]),_c('span',[_v("Example: linkTo Alice Pauline\n")]),_c('span',[_v("Note: This command is only available when a lesson is shown\n")])])])}
+with(this){return _c('pre',[_c('code',{pre:true,attrs:{"class":"hljs"}},[_c('span',[_v("No lesson is shown\n")]),_c('span',[_v("LinkTo command usage: linkTo STUDENT_NAME\n")]),_c('span',[_v("Example: linkTo Alice Pauline\n")]),_c('span',[_v("Note: This command is only available when a lesson is shown\n")])])])}
 },function anonymous(
 ) {
 with(this){return _c('ul',[_c('li',[_v("Current state: In the "),_c('em',[_c('strong',[_v("SCHEDULE list")])]),_v(" and a lesson is selected")]),_v(" "),_c('li',[_v("Input: "),_c('code',{pre:true,attrs:{"class":"hljs inline no-lang"}},[_v("linkTo Bernice Yong")]),_v(" "),_c('ul',[_c('li',[_v("Error: No such student with the name \"Bernice Yong\". Make sure the student's name is correct and try again.")])])])])}
