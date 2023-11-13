@@ -497,7 +497,7 @@ with(this){return _c('p',[_c('strong',[_v("Target user profile")]),_v(":")])}
 with(this){return _c('ul',[_c('li',[_v("Private Tuition Teachers")]),_v(" "),_c('li',[_v("has a need to manage a significant number of students")]),_v(" "),_c('li',[_v("Teaches multiple subjects")]),_v(" "),_c('li',[_v("prefer desktop apps over other types")]),_v(" "),_c('li',[_v("can type fast")]),_v(" "),_c('li',[_v("prefers typing to mouse interactions")]),_v(" "),_c('li',[_v("is reasonably comfortable using CLI apps")])])}
 },function anonymous(
 ) {
-with(this){return _c('p',[_c('strong',[_v("Value proposition")]),_v(": Helps private tuition teachers manage their students more easily. Faster access and storage of students’ contacts and data than a typical mouse/GUI driven app, provides better time management and productivity. The app will help to manage students for a single tuition teacher only. The app will only provide simple student analytics (without detailed student progress analysis).")])}
+with(this){return _c('p',[_c('strong',[_v("Value proposition")]),_v(": Helps private tuition teachers manage their students more easily. Faster access and storage of students’ contacts and data than a typical mouse/GUI driven app, provides better time management and productivity. The app will help to manage students for a single tuition teacher only.")])}
 },function anonymous(
 ) {
 with(this){return _c('h3',{attrs:{"id":"user-stories"}},[_v("User stories"),_c('a',{staticClass:"fa fa-anchor",attrs:{"href":"#user-stories","onclick":"event.stopPropagation()"}})])}
