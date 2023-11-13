@@ -1,0 +1,114 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":AddPersonCommandParser" as AddPersonCommandParser LOGIC_COLOR
+participant "d:AddPersonCommand" as AddPersonCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+box UI UI_COLOR_T1
+participant ":UIManager" as UIManager MODEL_COLOR
+participant ":MainWindow" as MainWindow MODEL_COLOR
+end box
+
+[-> LogicManager : execute("addPerson -name Alice")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("addPerson -name Alice")
+activate AddressBookParser
+
+create AddPersonCommandParser
+AddressBookParser -> AddPersonCommandParser
+activate AddPersonCommandParser
+
+AddPersonCommandParser --> AddressBookParser
+deactivate AddPersonCommandParser
+
+AddressBookParser -> AddPersonCommandParser : parse("-name Alice")
+activate AddPersonCommandParser
+
+create AddPersonCommand
+AddPersonCommandParser -> AddPersonCommand
+activate AddPersonCommand
+
+AddPersonCommand --> AddPersonCommandParser : d
+deactivate AddPersonCommand
+
+AddPersonCommandParser --> AddressBookParser : d
+deactivate AddPersonCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddPersonCommandParser -[hidden]-> AddressBookParser
+destroy AddPersonCommandParser
+
+AddressBookParser --> LogicManager : d
+deactivate AddressBookParser
+
+LogicManager -> AddPersonCommand : execute()
+activate AddPersonCommand
+
+AddPersonCommand -> Model : addPerson(toAdd)
+activate Model
+
+Model --> AddPersonCommand
+deactivate Model
+
+AddPersonCommand -> Model : setState(State.STUDENT)
+activate Model
+
+Model --> UIManager : changeLayout(State.STUDENT)
+activate UIManager
+
+UIManager --> MainWindow : changeLayout(State.STUDENT)
+activate MainWindow
+
+MainWindow --> UIManager
+deactivate MainWindow
+
+UIManager --> Model
+deactivate UIManager
+
+Model --> AddPersonCommand
+deactivate Model
+
+/'
+AddPersonCommand -> Model : showPerson(toAdd)
+activate Model
+
+Model -> UIManager : showPersonDetails(toAdd)
+activate UIManager
+
+UIManager -> MainWindow : handleShowPerson(toAdd)
+activate MainWindow
+
+MainWindow --> UIManager
+deactivate MainWindow
+
+UIManager --> Model
+deactivate UIManager
+
+Model --> AddPersonCommand
+deactivate Model
+'/
+
+
+create CommandResult
+AddPersonCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddPersonCommand
+deactivate CommandResult
+
+AddPersonCommand --> LogicManager : result
+deactivate AddPersonCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

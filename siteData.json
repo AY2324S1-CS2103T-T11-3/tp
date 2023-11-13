@@ -53,7 +53,7 @@
         "entry-point-classes": "Entry point classes",
         "common-classes": "Common classes",
         "implementation": "Implementation",
-        "list-feature": "List feature",
+        "app-state": "App State",
         "show-feature": "Show feature",
         "task-list-feature": "Task List Feature",
         "proposed-undo-redo-feature": "[Proposed] Undo/redo feature",
