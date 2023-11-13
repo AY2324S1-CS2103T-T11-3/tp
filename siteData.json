@@ -57,8 +57,6 @@
         "editpersoncommand-and-parser": "EditPersonCommand and Parser",
         "show-feature": "Show feature",
         "task-list-feature": "Task List Feature",
-        "proposed-undo-redo-feature": "[Proposed] Undo/redo feature",
-        "proposed-data-archiving": "[Proposed] Data archiving",
         "documentation-logging-testing-configuration-dev-ops": "Documentation, logging, testing, configuration, dev-ops",
         "appendix-requirements": "Appendix: Requirements",
         "product-scope": "Product scope",
@@ -89,7 +87,11 @@
         "command-history-feature": "Command History Feature",
         "clear": "Clear",
         "exit": "Exit",
-        "saving-data": "Saving data"
+        "saving-data": "Saving data",
+        "appendix-planned-enhancements": "Appendix: Planned Enhancements",
+        "deleting-of-tags": "Deleting of tags",
+        "unlinking-of-students-from-lessons-and-vice-versa": "Unlinking of students from lessons and vice versa",
+        "navigating-from-tasks-to-lesson": "Navigating from tasks to lesson"
       },
       "headingKeywords": {}
     },
