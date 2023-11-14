@@ -44,7 +44,7 @@ Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
 AddressBook .up.|> ReadOnlyAddressBook
-Schedule .up.|> ReadOnlySchedule
+ScheduleList .up.|> ReadOnlySchedule
 FullTaskList .up.|> ReadOnlyFullTaskList
 
 ModelManager .up.|> Model
@@ -57,12 +57,12 @@ ModelManager -left-> "1" AddressBook
 ModelManager -right-> "1" UserPrefs
 ModelManager -> UI
 ModelManager --> "1" State
-ModelManager -left-> "1" Schedule
+ModelManager -left-> "1" ScheduleList
 ModelManager -left-> "1" FullTaskList
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-Schedule *--> "1" ScheduleList
-ScheduleList --> "~* all" Lesson
+ScheduleList *--> "1" Schedule
+Schedule --> "~* all" Lesson
 Lesson --> "1" TaskList
 TaskList *--> Task
 
