@@ -1,0 +1,89 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LinkCommand" as LinkCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+box BiDirectionalMap UI_COLOR_T1
+participant ":BiDirectionalMap" as BiDirectionalMap MODEL_COLOR
+end box
+
+
+
+[-> LinkCommand : execute()
+activate LinkCommand
+
+LinkCommand -> Model : getPersonsFulfil()
+activate Model
+Model --> LinkCommand : personSet
+deactivate Model
+
+LinkCommand -> Model : getLessonsFulfil()
+activate Model
+Model --> LinkCommand : lessonSet
+deactivate Model
+
+LinkCommand -> Model : linkWith(person, lesson)
+activate Model
+
+Model -> BiDirectionalMap : addMapping(person, lesson)
+activate BiDirectionalMap
+BiDirectionalMap --> Model
+deactivate BiDirectionalMap
+
+Model --> LinkCommand
+deactivate Model
+
+alt currently viewing the linked student
+    LinkCommand -> Model : showPerson(person)
+    activate Model
+    deactivate Model
+
+else currently viewing the linked lesson
+    LinkCommand -> Model : showLesson(lesson)
+    activate Model
+    deactivate Model
+end
+
+deactivate Model
+
+create CommandResult
+LinkCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> LinkCommand
+deactivate CommandResult
+
+[<--LinkCommand : result
+deactivate "LinkCommand"
+
+
+
+
+
+
+
+'
+'Model -> UI : showPersonDetails(1)
+'activate UI
+'
+'UI --> Model
+'deactivate UI
+
+'Model --> LinkCommand
+'deactivate Model
+'
+'create CommandResult
+'LinkCommand -> CommandResult
+'activate CommandResult
+'
+'CommandResult --> LinkCommand
+'deactivate CommandResult
+@enduml
